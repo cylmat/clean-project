@@ -10,11 +10,17 @@ HELP
   help            h         show list of commands
 
 DOCKER COMMAND
+  build_container   build
+  run_container     run
+  build_and_run     bnr
+  connect_container co
+  stop_container    stop
+  stop_and_remove   snr
 
 INSTALLING COMMAND
-  create-project  create    create Symfony project with Maker bundle
-  db-install      db        install Doctrine and Symfony Form
-  qa-install      qa        install Php linters
+  create-project    create    create Symfony project with Maker bundle
+  db-install        db        install Doctrine and Symfony Form
+  qa-install        qa        install Php linters
 ";
 }
 
@@ -104,20 +110,20 @@ for i in "$@"; do
         run_container|run)
             run_container
         ;;
-        build_and_run|br)
+        build_and_run|bnr)
             build_container
             run_container
         ;;
-        connect_container|connect|co)
+        connect_container|co)
             connect_container
         ;;
         stop_container|stop)
             stop_container
         ;;
-        remove_container|remove|rm)
+        remove_container|rm)
             remove_container
         ;;
-        stop_and_remove|sr)
+        stop_and_remove|snr)
             stop_container
             remove_container
         ;;
