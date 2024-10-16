@@ -4,15 +4,57 @@
 display_usage() {
     echo "\
 Usage:
-  install [command]
+  run [command]
+
+HELP
+  help            h         show list of commands
+
+DOCKER COMMAND
 
 INSTALLING COMMAND
-  create    create Symfony project with Maker bundle
-  db        install Doctrine and Symfony Form
-  qa        install Php linters
-  h         show list of commands
+  create-project  create    create Symfony project with Maker bundle
+  db-install      db        install Doctrine and Symfony Form
+  qa-install      qa        install Php linters
 ";
 }
+
+##############
+### DOCKER ###
+##############
+
+build_container() {
+	docker build -t php-apache-img .
+}
+
+run_container() {
+	docker run -it -d -v .:/var/www -p 8123:80 --name phpapache php-apache-img
+}
+	
+build_and_run() {
+	bash build_container
+	bash run_container
+}
+
+connect_container() {
+	docker exec -it phpapache bash
+}
+
+stop_container() {
+	docker container stop phpapache 
+}
+
+remove_container() {
+	docker container remove phpapache
+}
+
+stop_and_remove() {
+	bash stop_container
+	bash remove_container
+}
+
+###############
+### INSTALL ###
+###############
 
 # CREATE #
 create_project() {
@@ -55,13 +97,38 @@ fi
 
 for i in "$@"; do
     case $i in
-        create)
+        # docker
+        build_container|build)
+            build_container
+        ;;
+        run_container|run)
+            run_container
+        ;;
+        build_and_run|br)
+            build_container
+            run_container
+        ;;
+        connect_container|connect|co)
+            connect_container
+        ;;
+        stop_container|stop)
+            stop_container
+        ;;
+        remove_container|remove|rm)
+            remove_container
+        ;;
+        stop_and_remove|sr)
+            stop_container
+            remove_container
+        ;;
+        # install
+        create_project|create)
             create_project
         ;;
-        db)
+        db_install|db)
             db_install
         ;;
-        qa)
+        qa_install|qa)
             qa_install
         ;;
         help|h)
