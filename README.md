@@ -3,6 +3,7 @@ Clean installed directory for symfony with doctrine
 
 Just run install script to help creating project:
 
+```
 Usage:
   run [command]
 HELP
@@ -18,3 +19,4 @@ INSTALLING COMMAND
   create-project    create    create Symfony project with Maker bundle
   db-install        db        install Doctrine and Symfony Form
   qa-install        qa        install Php linters
+```
