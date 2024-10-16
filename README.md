@@ -1,2 +1,2 @@
-# Clean-symfony6
-Just installed symfony6 with doctrine
+# Clean symfony project
+Just installed directory for symfony with doctrine
