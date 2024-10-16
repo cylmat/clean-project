@@ -1,8 +1,14 @@
 # Clean symfony project
 Clean installed directory for symfony with doctrine
 
-Just run install script to help creating project:
+Clone project in project dir
+```
+mkdir my_project && cd my_project
+https://github.com/cylmat/clean-symfony .
+rm -r .git
+```
 
+Then run install script to help creating project:
 ```
 Usage:
   run [command]
