@@ -7,8 +7,7 @@ Usage:
   run [command]
 
 HELP
-  help            h         show list of commands
-
+  help              h         show list of commands
 DOCKER COMMAND
   build_container   build
   run_container     run
@@ -16,7 +15,6 @@ DOCKER COMMAND
   connect_container co
   stop_container    stop
   stop_and_remove   snr
-
 INSTALLING COMMAND
   create-project    create    create Symfony project with Maker bundle
   db-install        db        install Doctrine and Symfony Form
