@@ -55,13 +55,13 @@ fi
 
 for i in "$@"; do
     case $i in
-        create_project|create)
+        create)
             create_project
         ;;
-        db-install|db)
+        db)
             db_install
         ;;
-        qa-install|qa)
+        qa)
             qa_install
         ;;
         help|h)
