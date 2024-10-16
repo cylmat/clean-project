@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# HELP
+# HELP #
 display_usage() {
     echo "\
 Usage:
@@ -14,6 +14,7 @@ INSTALLING COMMAND
 ";
 }
 
+# CREATE #
 create_project() {
     # create
     symfony new __project
@@ -27,7 +28,7 @@ create_project() {
     echo 'Access test page on "http://localhost:8123/test"'
 }
 
-# DATABASE
+# DATABASE #
 db_install() {
     # doctrine
     composer req doctrine --no-interaction
@@ -39,7 +40,7 @@ db_install() {
     echo 'Use "bin/console make:entity" or "bin/console make:crud"'
 }
 
-#QA
+# QA #
 qa_install() {
     mkdir -p tools
     composer req --dev --working-dir=tools friendsofphp/php-cs-fixer phpmd/phpmd phpunit/phpunit phpstan/phpstan
