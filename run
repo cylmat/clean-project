@@ -13,6 +13,7 @@ DOCKER COMMAND
   build_and_run     bnr
   connect_container co
   stop_container    stop
+  remove_container  rm
   stop_and_remove   snr
 INSTALLING COMMAND
   create-project    create    create Symfony project with Maker bundle
