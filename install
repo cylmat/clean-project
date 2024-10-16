@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# HELP
+display_usage() {
+    echo "\
+Usage:
+  install [command]
+
+INSTALLING COMMAND
+  create-project  create    create Symfony project with Maker bundle
+  db-install      db        install Doctrine and Symfony Form
+  qa-install      qa        install Php linters
+  help            h         show list of commands
+";
+}
+
+create_project() {
+    # create
+    symfony new __project
+    mv __project/* . && mv __project/.* . && rm -r __project
+    curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o public/.htaccess
+
+    # make
+    composer req --dev maker
+    chmod a+w -R .
+    echo 'Test' | bin/console make:controller
+    echo 'Access test page on "http://localhost:8123/test"'
+}
+
+# DATABASE
+db_install() {
+    # doctrine
+    composer req doctrine --no-interaction
+    sed -ie 's/DATABASE_URL="postgresql/# DATABASE_URL="postgresql/' .env
+    sed -ie 's/# DATABASE_URL="sqlite/DATABASE_URL="sqlite/' .env
+
+    # form
+    composer require form validator twig-bundle security-csrf
+    echo 'Use "bin/console make:entity" or "bin/console make:crud"'
+}
+
+#QA
+qa_install() {
+    mkdir -p tools
+    composer req --dev --working-dir=tools friendsofphp/php-cs-fixer phpmd/phpmd phpunit/phpunit phpstan/phpstan
+
+    echo "See: [https://phpqa.io] and [https://github.com/easy-coding-standard]
+    Suggested: [https://github.com/jakzal/toolbox] and [https://github.com/EdgedesignCZ/phpqa]"
+}
+
+if [[ -z "$@" ]]; then
+  display_usage
+fi
+
+for i in "$@"; do
+    case $i in
+        create_project|create)
+            create_project
+        ;;
+        db-install|db)
+            db_install
+        ;;
+        qa-install|qa)
+            qa_install
+        ;;
+        help|h)
+            display_usage
+        ;;
+    esac
+done
+
+exit 0
