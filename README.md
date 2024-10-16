@@ -4,7 +4,7 @@ Clean installed directory for symfony with doctrine
 Clone project in project dir
 ```
 mkdir my_project && cd my_project
-https://github.com/cylmat/clean-symfony .
+git clone https://github.com/cylmat/clean-symfony .
 rm -r .git
 ```
 
