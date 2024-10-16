@@ -5,7 +5,6 @@ display_usage() {
     echo "\
 Usage:
   run [command]
-
 HELP
   help              h         show list of commands
 DOCKER COMMAND
