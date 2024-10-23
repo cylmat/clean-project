@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://github.com/phan/phan
+
+curl -L https://github.com/phan/phan/releases/download/5.4.1/phan.phar -o bin/phan
+chmod +x bin/phan
