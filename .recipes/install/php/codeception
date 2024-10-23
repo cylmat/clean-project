@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://codeception.com
+
+curl -L https://codeception.com/codecept.phar -o bin/codecept
+chmod a+x bin/codecept
