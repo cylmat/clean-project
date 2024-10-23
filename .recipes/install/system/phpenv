@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# https://github.com/phpenv/phpenv
+
+curl -L https://raw.githubusercontent.com/phpenv/phpenv-installer/master/bin/phpenv-installer | bash
