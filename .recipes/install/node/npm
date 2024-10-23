@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://www.npmjs.com
+# We must install "bin/install nvm" before
+
+nvm install-latest-npm
