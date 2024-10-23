@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://github.com/phpmd/phpmd
+
+curl -L https://github.com/phpmd/phpmd/releases/download/2.13.0/phpmd.phar -o bin/phpmd
+chmod a+x bin/phpmd
