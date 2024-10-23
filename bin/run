@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+NOCOLOR="\e[0m"
+
+# HELP #
+display_usage() {
+    echo "\
+Usage:
+  run [command]
+HELP
+  help              h       show list of commands
+DOCKER COMMAND
+  build_container   build
+  run_container     run
+  build_and_run     bnr
+  connect_container co
+  stop_container    stop
+  stop_and_remove   snr";
+}
+
+##############
+### DOCKER ###
+##############
+
+build_container() {
+	docker build -t php-apache-img .
+}
+
+run_container() {
+	docker run -it -d -v .:/var/www -p 8123:80 --name phpapache php-apache-img
+}
+	
+build_and_run() {
+	bash build_container
+	bash run_container
+}
+
+connect_container() {
+	docker exec -it phpapache bash
+}
+
+stop_container() {
+	docker container stop phpapache 
+}
+
+remove_container() {
+	docker container remove phpapache
+}
+
+stop_and_remove() {
+	bash stop_container
+	bash remove_container
+}
+
+display_usage
