@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+composer require --dev \
+    brianium/paratest \
+    behat/behat \
+    friends-of-phpspec/phpspec-code-coverage \
+    kint-php/kint \
+    nikic/php-parser \
+    pestphp/pest \
+    phpro/grumphp \
+    phpspec/phpspec \
+    phpunit/phpunit \
+    phpunitgen/console \
+    sebastian/phpcpd \
+    squizlabs/php_codesniffer
