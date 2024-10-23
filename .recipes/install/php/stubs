@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# https://github.com/JetBrains
+
+git clone https://github.com/JetBrains/phpstorm-stubs.git vendor/jetbrains/phpstorm-stubs
