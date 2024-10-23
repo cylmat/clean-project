@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# https://deployer.org
+
+
+curl -L https://github.com/deployphp/deployer/releases/download/v7.0.2/deployer.phar -o bin/deployer
+chmod a+x bin/deployer
