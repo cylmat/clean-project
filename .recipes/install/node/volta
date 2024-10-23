@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# https://volta.sh
+
+curl https://get.volta.sh | bash
+
+# install Node
+# volta install node
+
+# start using Node
+# node
