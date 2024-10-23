@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# https://phing.info
+
+curl -LO https://www.phing.info/get/phing-2.17.4.phar
+curl -LO https://www.phing.info/get/phing-2.17.4.phar.sha512
+sha512sum --check phing-2.17.4.phar.sha512
+rm phing-2.17.4.phar.sha512
+mv phing-2.17.4.phar bin/phing
+chmod +x bin/phing
