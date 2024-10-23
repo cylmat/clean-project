@@ -10,12 +10,12 @@ NOCOLOR="\e[0m"
 display_usage() {
     echo "\
 Usage:
-  run [command]
-HELP
+  [command]
+For autocompletion, run 'source ${0}'
+
   help              h       show list of commands
-INSTALLING COMMAND
   list              ls
-  <script>          install specific script from '$INSTALL_DIR' directory";
+  [command]         install specific script from '$INSTALL_DIR' directory";
 }
 
 ####################
@@ -38,12 +38,10 @@ complete -o nospace -F _load bin/install
 ###############
 
 INSTALL_DIR=".recipes"
-
-INSTALL_SCRIPTS=$(find ${INSTALL_DIR} -type f | sort | sed -e 's~.recipes/~~' | tr "\n" " ")
-INSTALL_SCRIPTS_SHOW=$(find ${INSTALL_DIR} -type f | sort | sed -e 's~.recipes/~~')
+INSTALL_SCRIPTS_USE=$(find ${INSTALL_DIR} -type f | sort | sed -e 's~.recipes/~~')
 
 if [[ -z "$@" ]]; then
-    echo "Empty installation option."
+    display_usage
 fi
 
 for i in "$@"; do
@@ -51,12 +49,12 @@ for i in "$@"; do
         # list
         list|ls)
             echo -e "\n*** List of available scripts in '${YELLOW}$INSTALL_DIR${NOCOLOR}' directory ***"
-            echo -e "${BLUE}$INSTALL_SCRIPTS_SHOW${NOCOLOR}"
+            echo -e "${BLUE}$INSTALL_SCRIPTS_USE${NOCOLOR}"
             echo ""
         ;;
         # autocompletion
         _shortlist)
-            echo $(bin/install ls | tail -n +3)
+            echo ${INSTALL_SCRIPTS_USE}
         ;;
         # help
         help|h|--help)
@@ -64,10 +62,12 @@ for i in "$@"; do
         ;;
         # default
         *)
-            for script in ${INSTALL_SCRIPTS[@]}; do
+            for script in ${INSTALL_SCRIPTS_USE[@]}; do
                 if [[ "$@" == "$script" ]]; then
-                    echo "Installing '$script'"
+                    echo ""
+                    echo -e "${BLUE}Installing '$script'${NOCOLOR}"
                     sh -c "bash $INSTALL_DIR/$script"
+                    exit 0
                 fi
             done
             echo "'$@' not found."
