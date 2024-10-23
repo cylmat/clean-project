@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-RED="\e[31m"
-GREEN="\e[32m"
-YELLOW="\e[33m"
-BLUE="\e[34m"
-NOCOLOR="\e[0m"
-
 # HELP #
 display_usage() {
     echo "\
@@ -27,11 +21,11 @@ DOCKER COMMAND
 ##############
 
 build_container() {
-	docker build -t php-apache-img .
+	docker build -t project-img .
 }
 
 run_container() {
-	docker run -it -d -v .:/var/www -p 8123:80 --name phpapache php-apache-img
+	docker run -it -d -v .:/var/www -p 8123:80 --name project project-img
 }
 	
 build_and_run() {
@@ -40,15 +34,15 @@ build_and_run() {
 }
 
 connect_container() {
-	docker exec -it phpapache bash
+	docker exec -it project bash
 }
 
 stop_container() {
-	docker container stop phpapache 
+	docker container stop project 
 }
 
 remove_container() {
-	docker container remove phpapache
+	docker container remove project
 }
 
 stop_and_remove() {
@@ -56,4 +50,36 @@ stop_and_remove() {
 	bash remove_container
 }
 
-display_usage
+if [[ -z "$@" ]]; then
+    display_usage
+fi
+
+for opt in "$@"; do
+    case $opt in
+        build)
+          build_container
+        ;;
+        run)
+          run_container
+        ;;
+        bnr)
+          build_and_run
+        ;;
+        co)
+          connect_container
+        ;;
+        stop)
+          stop_container
+        ;;
+        rm)
+          remove_container
+        ;;
+        snr)
+          stop_and_remove
+        ;;
+        # help
+        help|h|--help)
+            display_usage
+        ;;
+    esac
+done

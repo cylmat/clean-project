@@ -1,3 +1,7 @@
+#
+# Use this Docker image with 
+# docker build -t project-img . --build-arg RECIPES=<recipe1> <recipe2>...
+
 # use docker image
 # php, php:apache, node, ubuntu
 FROM php:apache
@@ -5,7 +9,7 @@ FROM php:apache
 ARG RECIPES
 
 # app
-RUN apt update && apt install -y git jq sqlite3 vim zip
+RUN apt update
 
 # run
 RUN cat <<EOF > /tmp/run_docker.sh

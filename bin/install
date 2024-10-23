@@ -44,8 +44,8 @@ if [[ -z "$@" ]]; then
     display_usage
 fi
 
-for i in "$@"; do
-    case $i in
+for opt in "$@"; do
+    case $opt in
         # list
         list|ls)
             echo -e "\n*** List of available scripts in '${YELLOW}$INSTALL_DIR${NOCOLOR}' directory ***"
