@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# https://git-scm.com
-
-apt-get install git

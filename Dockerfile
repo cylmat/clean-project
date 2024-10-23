@@ -5,9 +5,7 @@ FROM php:apache
 ARG RECIPES
 
 # app
-# RUN apt update && apt install -y git jq sqlite3 vim zip
-# RUN git config --global user.email 'you@example.com'
-# RUN git config --global user.name 'Your Name'
+RUN apt update && apt install -y git jq sqlite3 vim zip
 
 # run
 RUN cat <<EOF > /tmp/run_docker.sh
