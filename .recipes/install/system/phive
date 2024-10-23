@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# https://phar.io
+
+apt update && apt install -y gpg
+curl -L "https://phar.io/releases/phive.phar" -o phive.phar
+curl -L "https://phar.io/releases/phive.phar.asc" -o /tmp/phive.phar.asc 
+gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x6AF725270AB81E04D79442549D8A98B29B2D5D79
+gpg --verify /tmp/phive.phar.asc phive.phar
+rm /tmp/phive.phar.asc
+chmod +x phive.phar
+mv phive.phar /usr/local/bin/phive
