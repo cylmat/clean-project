@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://github.com/phpstan/phpstan
+
+curl -L https://github.com/phpstan/phpstan/releases/download/1.8.6/phpstan.phar -o bin/phpstan
+chmod a+x bin/phpstan
