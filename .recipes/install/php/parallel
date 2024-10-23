@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://github.com/php-parallel-lint
+
+curl -L https://github.com/php-parallel-lint/PHP-Parallel-Lint/releases/download/v1.3.2/parallel-lint.phar -o bin/parallel-lint
+chmod +x bin/parallel-lint
