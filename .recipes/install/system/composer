@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# https://getcomposer.org
+
+curl -sS https://raw.githubusercontent.com/cylmat/docs/refs/heads/main/install/script/composer-install.sh | bash
+mv ./composer.phar /usr/local/bin/composer
+chmod a+x /usr/local/bin/composer
+
+
+
+# EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
+# php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
+# ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', '/tmp/composer-setup.php');")"
+
+# if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+# then
+#     >&2 echo 'ERROR: Invalid installer checksum'
+#     rm /tmp/composer-setup.php
+#     exit 1
+# fi
+
+# php /tmp/composer-setup.php
+# RESULT=$?
+# rm /tmp/composer-setup.php
+# mv composer.phar bin/composer
+# exit $RESULT
