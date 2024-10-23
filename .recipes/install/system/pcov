@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# https://github.com/krakjoe/pcov
+
+pecl install pcov && docker-php-ext-enable pcov
