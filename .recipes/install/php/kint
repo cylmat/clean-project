@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://kint-php.github.io
+
+curl -L https://raw.githubusercontent.com/kint-php/kint/master/build/kint.phar -o bin/kint
+chmod a+x bin/kint
