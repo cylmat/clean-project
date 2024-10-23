@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+sed -ie 's#/var/www/html#/var/www/public#' /etc/apache2/sites-enabled/000-default.conf
+cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+. /etc/apache2/envvars
