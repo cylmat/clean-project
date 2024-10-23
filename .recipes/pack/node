@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+NODE_DIR="${SCRIPT_DIR}/../node"
+
+${NODE_DIR}/volta
+
+volta install node
+
+node --version
+npm --version

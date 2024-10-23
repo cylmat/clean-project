@@ -11,7 +11,7 @@ display_usage() {
     echo "\
 Usage:
   [command]
-For autocompletion, run 'source ${0}'
+For autocompletion, run 'source install'
 
   help              h       show list of commands
   list              ls

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-INSTALL_BIN=".recipes/install"
-
-${INSTALL_BIN} composer
-${INSTALL_BIN} deployer
-${INSTALL_BIN} kint
-${INSTALL_BIN} nvm
-${INSTALL_BIN} symfony

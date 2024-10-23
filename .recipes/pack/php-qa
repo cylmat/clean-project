@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PHP_DIR="${SCRIPT_DIR}/../php"
+
+${PHP_DIR}/csfixer
+${PHP_DIR}/phan
+${PHP_DIR}/phpmd
+${PHP_DIR}/phpstan
+${PHP_DIR}/psalm

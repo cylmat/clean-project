@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PHP_DIR="${SCRIPT_DIR}/../php"
+
+${PHP_DIR}/composer
+${PHP_DIR}/deployer
+${PHP_DIR}/kint
+${PHP_DIR}/symfony

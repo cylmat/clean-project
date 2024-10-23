@@ -23,5 +23,10 @@ COPY .recipes /tmp/recipes
 RUN chmod a+x /tmp/run_docker.sh
 RUN /tmp/run_docker.sh ${RECIPES}
 
+# autocomplete
+# SHELL ["/bin/bash", "-c"]
+# COPY ./bin/install /tmp/install_script.sh
+# RUN . /tmp/install_script.sh
+
 # dir
 WORKDIR /var/www
