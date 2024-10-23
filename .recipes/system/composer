@@ -6,7 +6,7 @@ curl -sS https://raw.githubusercontent.com/cylmat/docs/refs/heads/main/install/s
 mv ./composer.phar /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
 
-
+composer --version
 
 # EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
 # php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"

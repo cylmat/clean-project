@@ -4,8 +4,8 @@
 
 curl https://get.volta.sh | bash
 
+volta --version
+
 # install Node
 # volta install node
 
-# start using Node
-# node

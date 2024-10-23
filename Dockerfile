@@ -1,6 +1,9 @@
 #
 # Use this Docker image with 
-# docker build -t project-img . --build-arg RECIPES=<recipe1> <recipe2>...
+#   docker build -t project-img . --build-arg RECIPES="<recipe1> <recipe2>..."
+#
+# Use local recipe 
+#   docker build -t project-img . --build-arg RECIPES="custom/project_install"
 
 # use docker image
 # php, php:apache, node, ubuntu

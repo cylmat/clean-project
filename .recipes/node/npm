@@ -4,3 +4,5 @@
 # We must install "bin/install nvm" before
 
 nvm install-latest-npm
+
+npm --version

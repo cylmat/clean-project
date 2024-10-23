@@ -21,11 +21,11 @@ DOCKER COMMAND
 ##############
 
 build_container() {
-	docker build -t project-img .
+	docker build -t project-img . --build-arg RECIPES=""
 }
 
 run_container() {
-	docker run -it -d -v .:/var/www -p 8123:80 --name project project-img
+	docker run -it -d -v .:/var/www -p 8123:80 --rm --name project project-img
 }
 	
 build_and_run() {
