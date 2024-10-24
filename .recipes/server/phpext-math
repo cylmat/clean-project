@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# math
+docker-php-ext-install \
+    bcmath \
+    random \
+    sodium
+
+php -m

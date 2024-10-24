@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# html
+docker-php-ext-install \
+    dom \
+    simplexml \
+    xml \
+    xsl
+
+php -m

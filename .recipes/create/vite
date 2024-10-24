@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# https://vite.dev
+# npm create vite@latest
+# yarn create vite
+
+# npm 7+, extra double-dash is needed:
+$ npm create vite@latest my-vue-app -- --template vue
+
+# yarn
+# yarn create vite my-vue-app --template vue
+
+npm --version

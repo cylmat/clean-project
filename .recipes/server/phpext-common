@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+###
+# Used for Docker php or php:apache
+# 
+# Possible values for ext-name:
+# bcmath bz2 calendar ctype curl dba dl_test dom enchant exif ffi fileinfo filter ftp gd gettext gmp hash iconv 
+# imap intl json ldap mbstring mysqli oci8 odbc opcache pcntl pdo pdo_dblib pdo_firebird pdo_mysql pdo_oci 
+# pdo_odbc pdo_pgsql pdo_sqlite pgsql phar posix pspell random readline reflection session shmop simplexml 
+# snmp soap sockets sodium spl standard sysvmsg sysvsem sysvshm tidy tokenizer xml xmlreader xmlwriter xsl zend_test zip
+###
+
+# Maybe should use one of these:
+# sudo apt-get install -y libbz2-dev sqlite3 libsqlite3-dev libssl-dev libcurl4-openssl-dev
+# libjpeg-dev libonig-dev libreadline-dev libtidy-dev libxslt-dev libzip-dev
+
+apt install -y \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libzip-dev
+
+# common
+docker-php-ext-install \
+    bz2 \
+    ctype \
+    curl \
+    json \
+    opcache \
+    reflection \
+    spl \
+    zip
+
+php -m

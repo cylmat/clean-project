@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# lang
+docker-php-ext-install \
+    gettext \
+    iconv \
+    intl \
+    mbstring
+
+php -m

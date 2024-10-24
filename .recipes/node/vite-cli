@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# https://vite.dev
+
+npm install -D vite
+
+vite --version

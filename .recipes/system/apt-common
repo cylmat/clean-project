@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-apt install -y jq sqlite3 vim zip
+apt install -y \
+    bzip2 \
+    jq \
+    sqlite3 \
+    vim \
+    zip

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+###
+# PEAR package manager is installed with PHP
+# PECL package manager is installed with PHP
+###
+
+# https://pecl.php.net/packages.php
+# "doc.php.net"
+# "pear.php.net"
+# "pecl.php.net"
+
+yes 'n' | pecl install -f apcu
+echo "extension=apcu.so" > /usr/local/etc/php/conf.d/acpu.ini
+
+php -m
