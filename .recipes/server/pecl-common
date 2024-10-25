@@ -10,6 +10,8 @@
 # "pear.php.net"
 # "pecl.php.net"
 
+pecl update-channels
+
 yes 'n' | pecl install -f apcu
 echo "extension=apcu.so" > /usr/local/etc/php/conf.d/acpu.ini
 

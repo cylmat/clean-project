@@ -27,6 +27,14 @@ build_container() {
 run_container() {
 	docker run -it -d -v .:/var/www -p 8080-8090:80-90 --rm --name project project-img
 }
+
+up_container() {
+  docker compose -f docker-compose.yml up -d --build
+}
+
+down_container() {
+  docker compose -f docker-compose.yml down --remove-orphans
+}
 	
 build_and_run() {
 	bash build_container
@@ -61,6 +69,12 @@ for opt in "$@"; do
         ;;
         run)
           run_container
+        ;;
+        up)
+          up_container
+        ;;
+        down)
+          down_container
         ;;
         bnr)
           build_and_run

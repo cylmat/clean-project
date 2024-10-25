@@ -1,0 +1,38 @@
+###
+# Uncomment services to your needs
+###
+
+# Include compose files
+include:
+
+##########
+# CUSTOM #
+##########
+   # - ./custom.yml
+   # - ./custom.yml.local
+
+##########
+# SERVER #
+##########
+   # - .recipes/docker/node.yml
+   - .recipes/docker/php-apache.yml
+   # - .recipes/docker/ubuntu.yml
+
+############
+# DATABASE #
+############
+   # - .recipes/docker/mariadb.yml
+   - .recipes/docker/mysql.yml
+   # - .recipes/docker/postgres.yml
+   # - .recipes/docker/redis.yml
+
+# DATABASE ADMIN #
+   # - .recipes/docker/adminer-standalone.yml
+   # - .recipes/docker/phpmyadmin.yml
+
+############
+# NETWORKS #
+############
+
+# networks:
+#    project_network:
