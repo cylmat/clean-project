@@ -1,4 +1,4 @@
-
 services:
-  redis:
-    image: redis
+
+    redis:
+        image: redis

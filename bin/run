@@ -12,6 +12,7 @@ DOCKER COMMAND
   run_container     run
   build_and_run     bnr
   connect_container co
+  reload
   stop_container    stop
   stop_and_remove   snr";
 }
@@ -25,7 +26,7 @@ build_container() {
 }
 
 run_container() {
-	docker run -it -d -v .:/var/www -p 8080-8090:80-90 --rm --name project project-img
+	docker run -it -d -v .:/var/www -p 80-90:80-90 --rm --name project project-img
 }
 
 up_container() {
@@ -34,6 +35,11 @@ up_container() {
 
 down_container() {
   docker compose -f docker-compose.yml down --remove-orphans
+}
+
+reload_container() {
+  docker compose -f docker-compose.yml down --remove-orphans
+  docker compose -f docker-compose.yml up -d --build
 }
 	
 build_and_run() {
@@ -75,6 +81,9 @@ for opt in "$@"; do
         ;;
         down)
           down_container
+        ;;
+        reload)
+          reload_container
         ;;
         bnr)
           build_and_run

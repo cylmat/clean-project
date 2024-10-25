@@ -29,5 +29,7 @@ COPY .recipes /tmp/recipes
 RUN chmod a+x /tmp/run_docker.sh
 RUN /tmp/run_docker.sh ${RECIPES}
 
+EXPOSE 80
+
 # dir
 WORKDIR /var/www

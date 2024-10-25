@@ -17,6 +17,7 @@ services:
                 RECIPES: |
                     # system/apt-common
                     # system/git
+        ports: [80:80]
         volumes:
             - .:/var/www
 
@@ -47,7 +48,7 @@ include:
 
 # DATABASE ADMIN #
     # - .recipes/docker/adminer-standalone.yml
-    # - .recipes/docker/phpmyadmin.yml
+    - .recipes/docker/phpmyadmin.yml
 
 ############
 # NETWORKS #

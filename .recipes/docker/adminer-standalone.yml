@@ -1,4 +1,5 @@
-
 services:
-  adminer:
-    image: adminer:standalone
+
+    adminer:
+        image: adminer:standalone
+        ports: [8080:80]

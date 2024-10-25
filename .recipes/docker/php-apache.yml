@@ -1,4 +1,4 @@
-
 services:
-  php-apache:
-    image: php:apache
+
+    php-apache:
+        image: php:apache
