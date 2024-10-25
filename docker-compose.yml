@@ -1,6 +1,24 @@
 ###
+# @see https://docs.docker.com/reference/cli/docker/compose
+# @see https://docs.docker.com/reference/compose-file/build
+#
 # Uncomment services to your needs
 ###
+
+########
+# MAIN #
+########
+
+services:
+    main:
+        build:
+            context: .
+            args:
+                RECIPES: |
+                    # system/apt-common
+                    # system/git
+        volumes:
+            - .:/var/www
 
 # Include compose files
 include:
@@ -8,31 +26,32 @@ include:
 ##########
 # CUSTOM #
 ##########
-   # - ./custom.yml
-   # - ./custom.yml.local
+    # - ./custom.yml
+    # - ./custom.yml.local
 
 ##########
 # SERVER #
 ##########
-   # - .recipes/docker/node.yml
-   - .recipes/docker/php-apache.yml
-   # - .recipes/docker/ubuntu.yml
+    # - .recipes/docker/node.yml
+    # - .recipes/docker/php.yml
+    # - .recipes/docker/php-apache.yml
+    # - .recipes/docker/ubuntu.yml
 
 ############
 # DATABASE #
 ############
-   # - .recipes/docker/mariadb.yml
-   - .recipes/docker/mysql.yml
-   # - .recipes/docker/postgres.yml
-   # - .recipes/docker/redis.yml
+    # - .recipes/docker/mariadb.yml
+    - .recipes/docker/mysql.yml
+    # - .recipes/docker/postgres.yml
+    # - .recipes/docker/redis.yml
 
 # DATABASE ADMIN #
-   # - .recipes/docker/adminer-standalone.yml
-   # - .recipes/docker/phpmyadmin.yml
+    # - .recipes/docker/adminer-standalone.yml
+    # - .recipes/docker/phpmyadmin.yml
 
 ############
 # NETWORKS #
 ############
 
 # networks:
-#    project_network:
+#     project_network:

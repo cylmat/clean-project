@@ -3,6 +3,5 @@
 apt install -y \
     bzip2 \
     jq \
-    sqlite3 \
     vim \
     zip
