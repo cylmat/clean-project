@@ -1,0 +1,2 @@
+configure current user in docker instead of root
+remove git safe directory

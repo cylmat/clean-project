@@ -6,6 +6,8 @@ YELLOW="\e[33m"
 BLUE="\e[34m"
 NOCOLOR="\e[0m"
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 # HELP #
 display_usage() {
     echo "\
@@ -37,24 +39,25 @@ complete -o nospace -F _load bin/install
 ### INSTALL ###
 ###############
 
-INSTALL_DIR=".recipes"
-INSTALL_SCRIPTS_USE=$(find ${INSTALL_DIR} -type f | sort | sed -e 's~.recipes/~~')
+INSTALL_DIR="${SCRIPT_DIR}/../.recipes"
+INSTALL_SCRIPTS=$(find ${INSTALL_DIR} -type f | sort | sed -e 's#^.*.recipes/##g')
 
 if [[ -z "$@" ]]; then
     display_usage
 fi
 
+# (for i in "${stringarray[@]}")
 for opt in "$@"; do
     case $opt in
         # list
         list|ls)
             echo -e "\n*** List of available scripts in '${YELLOW}$INSTALL_DIR${NOCOLOR}' directory ***"
-            echo -e "${BLUE}$INSTALL_SCRIPTS_USE${NOCOLOR}"
+            echo -e "${BLUE}$INSTALL_SCRIPTS${NOCOLOR}"
             echo ""
         ;;
         # autocompletion
         _shortlist)
-            echo ${INSTALL_SCRIPTS_USE}
+            echo ${INSTALL_SCRIPTS}
         ;;
         # help
         help|h|--help)
@@ -62,15 +65,16 @@ for opt in "$@"; do
         ;;
         # default
         *)
-            for script in ${INSTALL_SCRIPTS_USE[@]}; do
-                if [[ "$@" == "$script" ]]; then
+            for script in ${INSTALL_SCRIPTS[@]}; do
+                if [[ "$opt" == "$script" ]]; then
                     echo ""
                     echo -e "${BLUE}Installing '$script'${NOCOLOR}"
                     sh -c "bash $INSTALL_DIR/$script"
-                    exit 0
+                # else
+                    #echo "'$@' not found, skipping it."
                 fi
             done
-            echo "'$@' not found, skipping it."
+            
         ;;
     esac
 done

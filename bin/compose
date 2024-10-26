@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+# HELP #
+display_usage() {
+    echo "\
+Usage:
+  run [command]
+HELP
+  help    |h
+DOCKER COMPOSE
+  build
+  up
+  upnobuild
+  down
+  reload
+  connect |co
+  remove  |rm";
+}
+
+##############
+### DOCKER ###
+##############
+
+ENVMERGED_FILE=.envmerged
+
+_merge_dotenv_files() {
+  sort .env > .envmerged
+  if [[ -f ./.env.local ]]; then
+    sort -u -t '=' -k 1,1 .env.local .env > ${ENVMERGED_FILE}
+  fi
+}
+
+_remove_merged_dotenv() {
+  rm ${ENVMERGED_FILE}
+}
+
+build_container() {
+  _merge_dotenv_files
+  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml build
+  _remove_merged_dotenv
+}
+
+upnobuild_container() {
+  docker compose -f docker-compose.yml up -d
+}
+
+up_container() {
+  _merge_dotenv_files
+  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --build
+  _remove_merged_dotenv
+}
+
+down_container() {
+  docker compose -f docker-compose.yml down --remove-orphans
+}
+
+reload_container() {
+  ${SHELL} "$0" down
+  ${SHELL} "$0" up
+}
+
+connect_container() {
+	docker exec -it server bash
+}
+
+if [[ -z "$@" ]]; then
+    display_usage
+fi
+
+for opt in "$@"; do
+  case $opt in
+    build)
+      build_container
+    ;;
+    up)
+      up_container
+    ;;
+    upnobuild)
+      upnobuild_container
+    ;;
+    down)
+      down_container
+    ;;
+    reload)
+      reload_container
+    ;;
+    co|connect)
+      connect_container
+    ;;
+    rm|remove)
+      remove_container
+    ;;
+    # help
+    help|h|--help)
+        display_usage
+    ;;
+  esac
+done

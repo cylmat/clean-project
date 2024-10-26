@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
 
-# create
-symfony new __project
-mv __project/* . && mv __project/.* . && rm -r __project
-curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o public/.htaccess
+CREATE_SYMFONY_PROJECT_DIR=${CREATE_SYMFONY_PROJECT_DIR:=symfony_project}
+CREATE_SYMFONY_LISTEN_IP=${CREATE_SYMFONY_LISTEN_IP:=0.0.0.0}
+
+# DEPENDENCIES
+./bin/install system/git
+which composer || ./bin/install php/composer
+which symfony  || ./bin/install php/symfony-cli
+
+# # create
+symfony new ${CREATE_SYMFONY_PROJECT_DIR}
+
+# Use this in case of Apache Http server
+# curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o ${CREATE_SYMFONY_PROJECT_DIR}/public/.htaccess
 
 # make
-composer req --dev maker
-chmod a+w -R .
-echo 'Test' | bin/console make:controller
-echo 'Access test page on "http://localhost:8123/test"'
+# composer req --dev symfony/maker-bundle
+# chmod a+w -R .
+# echo 'Test' | bin/console make:controller
+# echo 'Access test page on "http://localhost:80/test"'
+
+echo "Run 'symfony local:server:start --dir=${CREATE_SYMFONY_PROJECT_DIR} --listen-ip=$CREATE_SYMFONY_LISTEN_IP' -d"

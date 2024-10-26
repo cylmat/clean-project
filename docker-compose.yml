@@ -20,10 +20,9 @@ services:
                 IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
                 RECIPES: |
                     local/main_recipes.local
+        command: sleep infinity
         ports: 
-            - 80:80
-            - 443:443
-            - 5173:5173
+            - ${MAIN_SERVER_PORTS:-"80:80"}
         volumes:
             - .:/var/www
 

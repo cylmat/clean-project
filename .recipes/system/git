@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
+SYSTEM_GIT_USER_NAME=${SYSTEM_GIT_USER_NAME:="Your Name"}
+SYSTEM_GIT_USER_EMAIL=${SYSTEM_GIT_USER_EMAIL:="you@example.com"}
+
 # https://git-scm.com
 
 apt-get install -y git
 
-# git init
+###
+# Check if inside git repository or configure one
+###
 
-# git config --local user.name 'Your Name'
-# git config --local user.email 'you@example.com'
+if [[ ! -d .git ]]; then
+    git init
+fi
+
+git config --global --add safe.directory $(pwd)
+git config --local init.defaultBranch main
+git config --local user.name "${SYSTEM_GIT_USER_NAME}"
+git config --local user.email "${SYSTEM_GIT_USER_EMAIL}"
