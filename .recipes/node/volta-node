@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+.recipes/node/volta
+
+# install Node
+volta install node
+
+node --version
+npm --version

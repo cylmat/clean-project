@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# https://vite.dev
+
+npm create vite@latest my-vue-app -- --template vue
+# yarn create vite my-vue-app --template vue
+
+
+
+###
+### Load project
+###
+
+# cd my-vue-app
+# npm install
+
+### npm 7+, extra double-dash is needed:
+# npm run dev -- --host 0.0.0.0

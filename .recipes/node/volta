@@ -4,8 +4,7 @@
 
 curl https://get.volta.sh | bash
 
+# Source Volta to update your current shell session
+export PATH="$HOME/.volta/bin:$PATH"
+
 volta --version
-
-# install Node
-# volta install node
-

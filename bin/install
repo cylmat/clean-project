@@ -70,7 +70,7 @@ for opt in "$@"; do
                     exit 0
                 fi
             done
-            echo "'$@' not found."
+            echo "'$@' not found, skipping it."
         ;;
     esac
 done

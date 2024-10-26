@@ -10,25 +10,32 @@
 ########
 
 services:
-    main:
+
+    # MAIN SERVER #
+    server:
+        container_name: server
         build:
             context: .
             args:
+                IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
                 RECIPES: |
-                    # system/apt-common
-                    # system/git
-        ports: [80:80]
+                    local/main_recipes.local
+        ports: 
+            - 80:80
+            - 443:443
+            - 5173:5173
         volumes:
             - .:/var/www
+
 
 # Include compose files
 include:
 
-##########
-# CUSTOM #
-##########
-    # - ./custom.yml
-    # - ./custom.yml.local
+##################
+# LOCAL / CUSTOM #
+##################
+
+    - ./local/add_services.yml${ADD_SERVICES_EXT-.dist}
 
 ##########
 # SERVER #
@@ -42,13 +49,13 @@ include:
 # DATABASE #
 ############
     # - .recipes/docker/mariadb.yml
-    - .recipes/docker/mysql.yml
+    # - .recipes/docker/mysql.yml
     # - .recipes/docker/postgres.yml
     # - .recipes/docker/redis.yml
 
 # DATABASE ADMIN #
     # - .recipes/docker/adminer-standalone.yml
-    - .recipes/docker/phpmyadmin.yml
+    # - .recipes/docker/phpmyadmin.yml
 
 ############
 # NETWORKS #

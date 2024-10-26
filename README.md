@@ -12,3 +12,11 @@ Then run install script to help creating project:
 ```
 ...
 ```
+
+
+
+
+------------------------
+Use /project.local
+.recipes.local
+etc...
