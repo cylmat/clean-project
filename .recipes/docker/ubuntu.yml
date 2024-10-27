@@ -1,4 +1,0 @@
-services:
-
-    ubuntu:
-        image: ubuntu

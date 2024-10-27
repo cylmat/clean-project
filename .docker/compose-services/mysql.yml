@@ -12,7 +12,7 @@ services:
             MYSQL_TCP_PORT: 3306
         ports: [3306:3306]
         volumes:
-            #- .docker/mysql/my.cnf:/etc/mysql/my.cnf:ro
+            #- .docker/config/mysql/my.cnf:/etc/mysql/my.cnf:ro
             - mysql:/var/lib/mysql
 
 volumes:

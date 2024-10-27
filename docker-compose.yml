@@ -39,22 +39,22 @@ include:
 ##########
 # SERVER #
 ##########
-    # - .recipes/docker/node.yml
-    # - .recipes/docker/php.yml
-    # - .recipes/docker/php-apache.yml
-    # - .recipes/docker/ubuntu.yml
+    # - .docker/compose-services/node.yml
+    # - .docker/compose-services/php.yml
+    # - .docker/compose-services/php-apache.yml
+    # - .docker/compose-services/ubuntu.yml
 
 ############
 # DATABASE #
 ############
-    # - .recipes/docker/mariadb.yml
-    # - .recipes/docker/mysql.yml
-    # - .recipes/docker/postgres.yml
-    # - .recipes/docker/redis.yml
+    # - .docker/compose-services/mariadb.yml
+    # - .docker/compose-services/mysql.yml
+    # - .docker/compose-services/postgres.yml
+    # - .docker/compose-services/redis.yml
 
 # DATABASE ADMIN #
-    # - .recipes/docker/adminer-standalone.yml
-    # - .recipes/docker/phpmyadmin.yml
+    # - .docker/compose-services/adminer-standalone.yml
+    # - .docker/compose-services/phpmyadmin.yml
 
 ############
 # NETWORKS #
