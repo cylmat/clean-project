@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 
-SYSTEM_GIT_USER_NAME=${SYSTEM_GIT_USER_NAME:="Your Name"}
-SYSTEM_GIT_USER_EMAIL=${SYSTEM_GIT_USER_EMAIL:="you@example.com"}
+###
+# ENV
+###
+echo "Usage: $0 --user-name <username> --user.email <email>";
+
+GIT_USER_NAME="Your Name"
+GIT_USER_EMAIL="you@example.com"
+
+eval set -- $(getopt -o '' --long user-name:,user-email: -- "$@")
+while true; do case "$1" in
+    --user-name)  echo "User.name is $2"; GIT_USER_NAME="$2"; shift 2;;
+    --user-email) echo "User.email is $2"; GIT_USER_EMAIL="$2"; shift 2;;
+    --)           shift; break;;
+esac; done
+### -env
 
 # https://git-scm.com
 
@@ -17,5 +30,5 @@ fi
 
 git config --global --add safe.directory $(pwd)
 git config --local init.defaultBranch main
-git config --local user.name "${SYSTEM_GIT_USER_NAME}"
-git config --local user.email "${SYSTEM_GIT_USER_EMAIL}"
+git config --local user.name "${GIT_USER_NAME}"
+git config --local user.email "${GIT_USER_EMAIL}"

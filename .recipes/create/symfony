@@ -1,23 +1,36 @@
 #!/usr/bin/env bash
 
-CREATE_SYMFONY_PROJECT_DIR=${CREATE_SYMFONY_PROJECT_DIR:=symfony_project}
-CREATE_SYMFONY_LISTEN_IP=${CREATE_SYMFONY_LISTEN_IP:=0.0.0.0}
+###
+# ENV
+###
+echo "Usage: $0 --project-dir <project_dir>";
+
+PROJECT_DIR=symfony_project
+
+eval set -- $(getopt -o '' --long project-dir: -- "$@")
+while true; do case "$1" in
+    --project-dir) echo "Project directory is $2"; PROJECT_DIR="$2"; shift 2;;
+    --)    shift; break;;
+esac; done
+### -env
 
 # DEPENDENCIES
 ./bin/install system/git
 which composer || ./bin/install php/composer
 which symfony  || ./bin/install php/symfony-cli
 
-# # create
-symfony new ${CREATE_SYMFONY_PROJECT_DIR}
+# CREATE
+symfony new ${PROJECT_DIR}
 
 # Use this in case of Apache Http server
-# curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o ${CREATE_SYMFONY_PROJECT_DIR}/public/.htaccess
+# curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o ${PROJECT_DIR}/public/.htaccess
 
-# make
+# MAKE
 # composer req --dev symfony/maker-bundle
 # chmod a+w -R .
 # echo 'Test' | bin/console make:controller
 # echo 'Access test page on "http://localhost:80/test"'
 
-echo "Run 'symfony local:server:start --dir=${CREATE_SYMFONY_PROJECT_DIR} --listen-ip=$CREATE_SYMFONY_LISTEN_IP' -d"
+# # INFO
+LISTEN_IP=0.0.0.0
+echo "Run 'symfony local:server:start --dir=${PROJECT_DIR} --listen-ip=$LISTEN_IP' -d"

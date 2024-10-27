@@ -6,7 +6,8 @@ YELLOW="\e[33m"
 BLUE="\e[34m"
 NOCOLOR="\e[0m"
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+CURRENT_SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+RECIPES_DIR=$(realpath "${CURRENT_SCRIPT_DIR}/../.recipes")
 
 # HELP #
 display_usage() {
@@ -14,10 +15,9 @@ display_usage() {
 Usage:
   [command]
 For autocompletion, run 'source install'
-
   help              h       show list of commands
   list              ls
-  [command]         install specific script from '$INSTALL_DIR' directory";
+  [command]         install specific script from '$RECIPES_DIR' directory";
 }
 
 ####################
@@ -39,42 +39,16 @@ complete -o nospace -F _load bin/install
 ### INSTALL ###
 ###############
 
-INSTALL_DIR="${SCRIPT_DIR}/../.recipes"
-INSTALL_SCRIPTS=$(find ${INSTALL_DIR} -type f | sort | sed -e 's#^.*.recipes/##g')
+INSTALL_SCRIPTS_LIST=$(find ${RECIPES_DIR} -type f | sort | sed -e 's#^.*.recipes/##g')
 
-if [[ -z "$@" ]]; then
-    display_usage
-fi
+if [[ -z "$@" ]]; then display_usage;
 
-# (for i in "${stringarray[@]}")
-for opt in "$@"; do
-    case $opt in
-        # list
-        list|ls)
-            echo -e "\n*** List of available scripts in '${YELLOW}$INSTALL_DIR${NOCOLOR}' directory ***"
-            echo -e "${BLUE}$INSTALL_SCRIPTS${NOCOLOR}"
-            echo ""
-        ;;
-        # autocompletion
-        _shortlist)
-            echo ${INSTALL_SCRIPTS}
-        ;;
-        # help
-        help|h|--help)
-            display_usage
-        ;;
-        # default
-        *)
-            for script in ${INSTALL_SCRIPTS[@]}; do
-                if [[ "$opt" == "$script" ]]; then
-                    echo ""
-                    echo -e "${BLUE}Installing '$script'${NOCOLOR}"
-                    sh -c "bash $INSTALL_DIR/$script"
-                # else
-                    #echo "'$@' not found, skipping it."
-                fi
-            done
-            
-        ;;
-    esac
-done
+elif [[ "help" == "$@" ]]; then display_usage;
+
+elif [[ "list" == "$@" ]]; then
+    echo -e "\n*** List of available scripts in '${YELLOW}$RECIPES_DIR${NOCOLOR}' directory ***"
+    echo -e "${BLUE}$INSTALL_SCRIPTS_LIST${NOCOLOR}"
+    echo ""
+
+# run recipe
+else let o; o="$@"; sh -c "$RECIPES_DIR/$o"; fi

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-SYSTEM_APT_COMMON_INSTALL=${SYSTEM_APT_COMMON_INSTALL:=zip}
-
 apt update
 
 apt install -y \
@@ -9,7 +7,3 @@ apt install -y \
     jq \
     vim \
     zip
-
-if [ ! -z "$SYSTEM_APT_COMMON_INSTALL" ]; then
-    apt install -y {$SYSTEM_APT_COMMON_INSTALL}
-fi

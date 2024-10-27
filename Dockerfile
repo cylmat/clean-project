@@ -10,7 +10,7 @@
 #
 
 ARG IMAGE="ubuntu"
-ARG RECIPES
+ARG INSTALL_RECIPES
 
 FROM ${IMAGE} AS BASE
 
@@ -26,7 +26,7 @@ for r in "\$@"; do cat "/tmp/recipes/\${r}" | sh; done
 EOF
 COPY .recipes /tmp/recipes
 RUN chmod a+x /tmp/run_docker.sh
-RUN /tmp/run_docker.sh ${RECIPES}
+RUN /tmp/run_docker.sh ${INSTALL_RECIPES}
 
 # dir
 WORKDIR /var/www

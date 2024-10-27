@@ -18,11 +18,11 @@ services:
             context: .
             args:
                 IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
-                RECIPES: |
-                    local/main_recipes.local
+                INSTALL_RECIPES: |
+                    .local/main_recipes.local
         command: sleep infinity
         ports: 
-            - ${MAIN_SERVER_PORTS:-"80:80"}
+            - ${MAIN_SERVER_PORTS:-80:80}
         volumes:
             - .:/var/www
 
@@ -34,7 +34,7 @@ include:
 # LOCAL / CUSTOM #
 ##################
 
-    - ./local/add_services.yml${ADD_SERVICES_EXT-.dist}
+    - ./.local/add_services.yml${ADD_SERVICES_EXT-.dist}
 
 ##########
 # SERVER #

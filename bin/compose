@@ -13,8 +13,7 @@ DOCKER COMPOSE
   upnobuild
   down
   reload
-  connect |co
-  remove  |rm";
+  connect |co";
 }
 
 ##############
@@ -86,9 +85,6 @@ for opt in "$@"; do
     ;;
     co|connect)
       connect_container
-    ;;
-    rm|remove)
-      remove_container
     ;;
     # help
     help|h|--help)

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# https://api-tools.getlaminas.org/
+# https://api-tools.getlaminas.org
 
 composer create-project laminas-api-tools/api-tools-skeleton
 
