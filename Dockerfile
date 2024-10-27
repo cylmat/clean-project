@@ -17,7 +17,14 @@ FROM ${IMAGE} AS BASE
 RUN cat /etc/os-release
 
 # App
-RUN apt update && apt install -y zip
+RUN apt update
+RUN apt install -y \
+    bzip2 \
+    jq \
+    procps \
+    sqlite3 \
+    vim \
+    zip
 
 # Git @todo use a better config way
 RUN apt install -y git

@@ -29,11 +29,14 @@ symfony new ${PROJECT_DIR}
 # curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o ${PROJECT_DIR}/public/.htaccess
 
 # MAKE
-# composer req --dev symfony/maker-bundle
-# chmod a+w -R .
-# echo 'Test' | bin/console make:controller
-# echo 'Access test page on "http://localhost:80/test"'
+cd ${PROJECT_DIR}
+composer req --dev symfony/maker-bundle
+chmod a+w -R . # @todo use a better way instead of this
+echo 'Test' | bin/console make:controller
+cd ..
 
 # # INFO
 LISTEN_IP=0.0.0.0
-echo "Run 'symfony local:server:start --dir=${PROJECT_DIR} --listen-ip=$LISTEN_IP' -d"
+PORT=80
+echo "Run 'symfony local:server:start --dir=$PROJECT_DIR --listen-ip=$LISTEN_IP --port=$PORT -d"
+echo "Access test page on http://localhost:$PORT/test"
