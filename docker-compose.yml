@@ -12,8 +12,8 @@
 services:
 
     # MAIN SERVER #
-    server:
-        container_name: server
+    main_server:
+        container_name: main_server
         build:
             context: .
             args:
@@ -48,7 +48,7 @@ include:
 # DATABASE #
 ############
     # - .docker/compose-services/mariadb.yml
-    # - .docker/compose-services/mysql.yml
+    - .docker/compose-services/mysql.yml
     # - .docker/compose-services/postgres.yml
     # - .docker/compose-services/redis.yml
 

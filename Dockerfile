@@ -16,10 +16,15 @@ FROM ${IMAGE} AS BASE
 
 RUN cat /etc/os-release
 
-# app
+# App
 RUN apt update && apt install -y zip
 
-# run
+# Git @todo use a better config way
+RUN apt install -y git
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
+
+# Run
 RUN cat <<EOF > /tmp/run_docker.sh
 #!/usr/bin/env bash
 for r in "\$@"; do cat "/tmp/recipes/\${r}" | sh; done
@@ -28,5 +33,5 @@ COPY .recipes /tmp/recipes
 RUN chmod a+x /tmp/run_docker.sh
 RUN /tmp/run_docker.sh ${INSTALL_RECIPES}
 
-# dir
+# Dir
 WORKDIR /var/www

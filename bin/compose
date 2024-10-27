@@ -9,21 +9,21 @@ HELP
   help    |h
 DOCKER COMPOSE
   build
-  up
   upnobuild
-  down
+  up|start
+  down|stop
   reload
-  connect |co";
+  connect|co";
 }
 
 ##############
 ### DOCKER ###
 ##############
 
-ENVMERGED_FILE=.envmerged
+ENVMERGED_FILE=/tmp/.envmerged
 
 _merge_dotenv_files() {
-  sort .env > .envmerged
+  sort .env > ${ENVMERGED_FILE}
   if [[ -f ./.env.local ]]; then
     sort -u -t '=' -k 1,1 .env.local .env > ${ENVMERGED_FILE}
   fi
@@ -59,7 +59,7 @@ reload_container() {
 }
 
 connect_container() {
-	docker exec -it server bash
+	docker exec -it main_server bash
 }
 
 if [[ -z "$@" ]]; then
@@ -68,27 +68,12 @@ fi
 
 for opt in "$@"; do
   case $opt in
-    build)
-      build_container
-    ;;
-    up)
-      up_container
-    ;;
-    upnobuild)
-      upnobuild_container
-    ;;
-    down)
-      down_container
-    ;;
-    reload)
-      reload_container
-    ;;
-    co|connect)
-      connect_container
-    ;;
-    # help
-    help|h|--help)
-        display_usage
-    ;;
+    build)         build_container;;
+    upnobuild)     upnobuild_container;;
+    up|start)      up_container;;
+    down|stop)     down_container;;
+    reload)        reload_container;;
+    co|connect)    connect_container;;
+    help|h|--help) display_usage;;
   esac
 done

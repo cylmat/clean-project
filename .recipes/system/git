@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 
+# https://git-scm.com
+
+echo "Installing Git...";
+
 ###
 # ENV
 ###
-echo "Usage: $0 --user-name <username> --user.email <email>";
+ echo "Usage: $0";
+# echo "Usage: $0 --user-name <username> --user.email <email>";
 
-GIT_USER_NAME="Your Name"
-GIT_USER_EMAIL="you@example.com"
+# GIT_CONFIGURE=0
+# GIT_USER_NAME="Your Name"
+# GIT_USER_EMAIL="you@example.com"
 
-eval set -- $(getopt -o '' --long user-name:,user-email: -- "$@")
-while true; do case "$1" in
-    --user-name)  echo "User.name is $2"; GIT_USER_NAME="$2"; shift 2;;
-    --user-email) echo "User.email is $2"; GIT_USER_EMAIL="$2"; shift 2;;
-    --)           shift; break;;
-esac; done
+# eval set -- $(getopt -o '' --long configure:,user-name:,user-email: -- "$@")
+# while true; do case "$1" in
+#     --configure)  echo "Configure git"; GIT_CONFIGURE=1; shift;;
+#     --user-name)  echo "User.name is $2"; GIT_USER_NAME="$2"; shift 2;;
+#     --user-email) echo "User.email is $2"; GIT_USER_EMAIL="$2"; shift 2;;
+#     --)           shift; break;;
+# esac; done
 ### -env
-
-# https://git-scm.com
 
 apt-get install -y git
 
@@ -24,11 +29,15 @@ apt-get install -y git
 # Check if inside git repository or configure one
 ###
 
-if [[ ! -d .git ]]; then
-    git init
-fi
+# if [[ ! -d .git ]]; then
+#     git init
+# fi
 
-git config --global --add safe.directory $(pwd)
-git config --local init.defaultBranch main
-git config --local user.name "${GIT_USER_NAME}"
-git config --local user.email "${GIT_USER_EMAIL}"
+# if [[ $GIT_CONFIGURE -eq 1 ]]; then
+#     echo "Configuring Git...";
+
+#     git config --global --add safe.directory $(pwd)
+#     git config --local init.defaultBranch main
+#     git config --local user.name "${GIT_USER_NAME}"
+#     git config --local user.email "${GIT_USER_EMAIL}"
+# fi
