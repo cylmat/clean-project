@@ -2,3 +2,4 @@ configure current user in docker instead of root
 remove git safe directory
 add usage of each command in "bin/install list"
 better dockerfile git global config
+better api-platform without chmod 777 -R .

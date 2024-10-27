@@ -2,6 +2,10 @@
 
 
 composer require --dev \
+    symfony/maker-bundle
+
+# @todo put these in correct recipe
+composer require --dev \
     brianium/paratest \
     behat/behat \
     friends-of-phpspec/phpspec-code-coverage \

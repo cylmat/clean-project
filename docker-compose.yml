@@ -23,6 +23,10 @@ services:
         command: sleep infinity
         ports: 
             - ${MAIN_SERVER_PORTS:-80:80}
+            - 81-84:81-84
+            # - 8080-8082:8080-8082
+            # - 443:443
+            # - 5173-5175:5173:5175
         volumes:
             - .:/var/www
 
