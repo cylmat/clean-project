@@ -2,12 +2,12 @@
 
 # https://git-scm.com
 
-echo "Installing Git...";
+# echo "Installing Git...";
 
 ###
 # ENV
 ###
- echo "Usage: $0";
+#  echo "Usage: $0";
 # echo "Usage: $0 --user-name <username> --user.email <email>";
 
 # GIT_CONFIGURE=0
@@ -23,7 +23,7 @@ echo "Installing Git...";
 # esac; done
 ### -env
 
-apt-get install -y git
+# apt-get install -y git
 
 ###
 # Check if inside git repository or configure one
