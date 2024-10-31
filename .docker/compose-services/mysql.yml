@@ -12,8 +12,25 @@ services:
             MYSQL_TCP_PORT: 3306
         ports: [3306:3306]
         volumes:
-            #- .docker/config/mysql/my.cnf:/etc/mysql/my.cnf:ro
+            #- ../../.docker/mysql/my.cnf:/etc/mysql/my.cnf:ro
+            - ../../.fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
             - mysql:/var/lib/mysql
+        ##########
+        # IMPORT : mysql database < script.sql
+        ##########
+
+    # adminer:
+    #     adminer4:
+    #     image: adminer:4-standalone
+    #     restart: always
+    #     ports: [8081:8080]
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports: [8080:80]
+        environment: 
+            - PMA_ARBITRARY=1
 
 volumes:
     mysql:

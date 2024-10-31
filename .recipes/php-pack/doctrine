@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# https://www.doctrine-project.org
+
+# "composer require doctrine" install symfony doctrine bridge
+
+composer require doctrine/coding-standard \
+    doctrine/collections \
+    doctrine/common \
+    doctrine/data-fixtures \
+    doctrine/dbal \
+    doctrine/event-manager \
+    doctrine/inflector \
+    doctrine/instantiator \
+    doctrine/lexer \
+    doctrine/migrations \
+    doctrine/orm \
+    doctrine/persistence
+
+
+
+# doctrine/mongodb-odm require phpext-mongodb
+# docker-php-ext-sodium.ini

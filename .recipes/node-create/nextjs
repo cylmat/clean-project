@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# https://nextjs.org/
+
+
+npx create-next-app@latest

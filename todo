@@ -3,3 +3,39 @@ remove git safe directory
 add usage of each command in "bin/install list"
 better dockerfile git global config
 better api-platform without chmod 777 -R .
+
+--- react
+https://nextjs.org/
+
+--- apache
+ Apache Superset
+ Apache Camel
+ Flink
+ Airflow
+ Pulsar
+ Spark
+ IOTDB
+ Apache Isis
+ Apache NuttX
+ Apache Shardingsphere
+HTTP Server
+Cassandra
+Hadoop
+https://nifi.apache.org/
+Beam
+Mesos
+Kafka
+Solr
+Nutch
+Flume
+Avro
+
+---AWS
+Amazon S3, Amazon DynamoDB, Amazon Glacier
+https://aws.amazon.com/fr/training/digital
+
+---
+
+--- https://www.elastic.co/fr/elastic-stack
+--- https://novu.co/
+--- https://nodered.org/

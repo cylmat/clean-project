@@ -50,7 +50,8 @@ up_container() {
 }
 
 down_container() {
-  docker compose -f docker-compose.yml down --remove-orphans
+  # --volumes clean attached volumes, so run docker-entrypoint-initdb.d on "up"
+  docker compose -f docker-compose.yml down --remove-orphans --volumes
 }
 
 reload_container() {

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# https://docs.aws.amazon.com/sdk-for-php
+
+composer require aws/aws-sdk-php

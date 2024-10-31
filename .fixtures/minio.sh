@@ -4,7 +4,7 @@
 ### DATA ###
 ############
 
-echo "Security blood price gas point reality." > /tmp/minio.data
+echo "Security block price gas point reality." > /tmp/minio.data
 
 ##############
 ### CLIENT ###
