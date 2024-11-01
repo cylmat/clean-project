@@ -7,6 +7,7 @@ Front
 Node
 - https://expressjs.com
 - https://nextjs.org
+- https://vuejs.org
 
 Back
 - https://slimframework.com
