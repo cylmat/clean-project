@@ -34,9 +34,9 @@ RUN git config --global user.name "Your Name"
 # Run
 RUN cat <<EOF > /tmp/run_docker.sh
 #!/usr/bin/env bash
-for r in "\$@"; do cat "/tmp/recipes/\${r}" | sh; done
+for r in "\$@"; do cat "/tmp/.recipes/\${r}" | sh; done
 EOF
-COPY .recipes /tmp/recipes
+COPY .recipes /tmp/.recipes
 RUN chmod a+x /tmp/run_docker.sh
 RUN /tmp/run_docker.sh ${INSTALL_RECIPES}
 

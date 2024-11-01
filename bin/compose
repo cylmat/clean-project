@@ -39,14 +39,13 @@ build_container() {
   _remove_merged_dotenv
 }
 
-upnobuild_container() {
-  docker compose -f docker-compose.yml up -d
+upbuild_container() {
+  ${SHELL} "$0" build
+  docker compose -f docker-compose.yml up -d --force-recreate --build
 }
 
 up_container() {
-  _merge_dotenv_files
-  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --build
-  _remove_merged_dotenv
+  docker compose -f docker-compose.yml up -d
 }
 
 down_container() {
@@ -70,7 +69,7 @@ fi
 for opt in "$@"; do
   case $opt in
     build)         build_container;;
-    upnobuild)     upnobuild_container;;
+    upbuild)       upbuild_container;;
     up|start)      up_container;;
     down|stop)     down_container;;
     reload)        reload_container;;

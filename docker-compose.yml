@@ -18,14 +18,10 @@ services:
             context: .
             args:
                 IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
-                INSTALL_RECIPES: |
-                    .local/main_recipes.local
+                INSTALL_RECIPES: .local/main_recipes.local
         command: sleep infinity
         ports: 
-            - ${MAIN_SERVER_PORTS:-80:89}
-            - 443:443
-            - 3000-3005:3000-3005
-            - 5170-5175:5170-5175
+            - ${MAIN_SERVER_PORTS:-80:80}
         volumes:
             - .:/var/www
 
@@ -57,7 +53,7 @@ include:
 
 # DATABASE ADMIN #
     # - .docker/compose-services/adminer-standalone.yml
-    # - .docker/compose-services/phpmyadmin.yml
+    - .docker/compose-services/phpmyadmin.yml
 
 ############
 # NETWORKS #
