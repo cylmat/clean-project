@@ -11,21 +11,22 @@ RUN cat /etc/os-release
 RUN apt update
 RUN apt install -y \
     bzip2 \
-    curl
-#     jq \
-#     procps \
-#     sqlite3 \
-#     vim \
-#     zip
+    curl \
+    jq \
+    procps \
+    sqlite3 \
+    vim \
+    zip
 
 # Git
-# RUN apt install -y git
-# RUN git config --global user.email "you@example.com"
-# RUN git config --global user.name "Your Name"
+RUN apt install -y git
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
 
 # Init
 COPY .recipes /usr/local/.recipes
 RUN chmod a+x /usr/local/.recipes
+RUN if test -f /usr/local/.recipes/init_main_recipes; then sh /usr/local/.recipes/init_main_recipes; fi
 RUN if test -f /usr/local/.recipes/init_main_recipes.local; then sh /usr/local/.recipes/init_main_recipes.local; fi
 
 # Dir

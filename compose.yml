@@ -27,15 +27,7 @@ services:
             - .:/var/www
 
 
-# Include compose files
 include:
-
-##################
-# LOCAL / CUSTOM #
-##################
-
-    # Modify filename to project's need
-    #- .docker/local/additional_services.yml
 
 ##########
 # SERVER #
@@ -43,7 +35,7 @@ include:
     # - .docker/compose-services/node.yml
     # - .docker/compose-services/php.yml
     # - .docker/compose-services/php-apache.yml
-    # - .docker/compose-services/ubuntu.yml
+    # - .docker/compose-services/ubuntu.yml 
 
 ############
 # DATABASE #

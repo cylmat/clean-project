@@ -20,6 +20,7 @@ DOCKER COMPOSE
 ### DOCKER ###
 ##############
 
+COMPOSE_FILE="compose.yml"
 ENVMERGED_FILE=/tmp/.envmerged
 
 _merge_dotenv_files() {
@@ -27,6 +28,18 @@ _merge_dotenv_files() {
   if [[ -f ./.env.local ]]; then
     echo "Creating ${ENVMERGED_FILE}"
     sort -u -t '=' -k 1,1 .env.local .env > ${ENVMERGED_FILE}
+  fi
+
+  if [[ -f ./compose.override.yml ]]; then
+    COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml"
+  fi
+
+  if [[ -f ./compose.override.yml.dist ]]; then
+    COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml.dist"
+  fi
+
+  if [[ -f ./compose.override.yml.local ]]; then
+    COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml.local"
   fi
 }
 
@@ -39,23 +52,22 @@ _remove_merged_dotenv() {
 
 build_container() {
   _merge_dotenv_files
-  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml build
+  docker compose --env-file=${ENVMERGED_FILE} -f ${COMPOSE_FILE} build
 }
 
 upbuild_container() {
   ${SHELL} "$0" build
-  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --force-recreate --build
+  docker compose --env-file=${ENVMERGED_FILE} -f ${COMPOSE_FILE} up -d --force-recreate --build
 }
 
 up_container() {
   _merge_dotenv_files
-  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --remove-orphans
+  docker compose --env-file=${ENVMERGED_FILE} -f ${COMPOSE_FILE} up -d --remove-orphans
 }
 
 down_container() {
-  _merge_dotenv_files
   # --volumes clean attached volumes, so run docker-entrypoint-initdb.d on "up"
-  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml down --remove-orphans --volumes
+  docker compose -f ${COMPOSE_FILE} down --remove-orphans --volumes
 }
 
 reload_container() {

@@ -1,0 +1,8 @@
+
+###
+# COPY THIS SAMPLE FILE TO "compose.override.yml.local" to automatically load it in compose.yml
+###
+
+include:
+
+    # - .docker/compose-services/my_custom_service.yml

@@ -2,4 +2,5 @@ services:
 
     adminer:
         image: adminer:standalone
-        ports: [8080:80]
+        ports: 
+            - ${ADMINER_PORTS:-8080:80}

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-# COPY THIS SAMPLE FILE TO "init_main_recipes.local"
-# Run /usr/local/.recipes/<recipe_name>
+# COPY THIS SAMPLE FILE TO "init_main_recipes.local" to automatically load it in Dockerfile
 ###
 
-# /usr/local/.recipes/system/php-tools/composer
+# /usr/local/.recipes/php-tools/composer

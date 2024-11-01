@@ -13,10 +13,11 @@ Then run install script to help creating project:
 ...
 ```
 
+LOCAL UNCOMMITED OVERRIDING
+```
+RECIPES
+- in .recipes/init_main_recipes.local
 
-
-
-------------------------
-Use /project.local
-.recipes.local
-etc...
+SERVICES
+- in compose.override.yml.local
+```
