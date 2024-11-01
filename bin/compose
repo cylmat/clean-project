@@ -25,32 +25,37 @@ ENVMERGED_FILE=/tmp/.envmerged
 _merge_dotenv_files() {
   sort .env > ${ENVMERGED_FILE}
   if [[ -f ./.env.local ]]; then
+    echo "Creating ${ENVMERGED_FILE}"
     sort -u -t '=' -k 1,1 .env.local .env > ${ENVMERGED_FILE}
   fi
 }
 
 _remove_merged_dotenv() {
-  rm ${ENVMERGED_FILE}
+  if [[ -f ${ENVMERGED_FILE} ]]; then
+    echo "Removing ${ENVMERGED_FILE}"
+    rm ${ENVMERGED_FILE}
+  fi
 }
 
 build_container() {
   _merge_dotenv_files
   docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml build
-  _remove_merged_dotenv
 }
 
 upbuild_container() {
   ${SHELL} "$0" build
-  docker compose -f docker-compose.yml up -d --force-recreate --build
+  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --force-recreate --build
 }
 
 up_container() {
-  docker compose -f docker-compose.yml up -d
+  _merge_dotenv_files
+  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml up -d --remove-orphans
 }
 
 down_container() {
+  _merge_dotenv_files
   # --volumes clean attached volumes, so run docker-entrypoint-initdb.d on "up"
-  docker compose -f docker-compose.yml down --remove-orphans --volumes
+  docker compose --env-file=${ENVMERGED_FILE} -f docker-compose.yml down --remove-orphans --volumes
 }
 
 reload_container() {
@@ -65,6 +70,10 @@ connect_container() {
 if [[ -z "$@" ]]; then
     display_usage
 fi
+
+#######
+# RUN #
+#######
 
 for opt in "$@"; do
   case $opt in

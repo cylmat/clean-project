@@ -1,8 +1,0 @@
-###
-# COPY THIS FILE TO add_services.yml.local
-###
-
-# services:
-
-  # service_name:
-    # image: image_name

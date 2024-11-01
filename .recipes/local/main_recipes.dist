@@ -1,6 +1,0 @@
-###
-# COPY THIS FILE TO main_recipes.local
-###
-#!/usr/bin/env bash
-
-# system/apt-common
