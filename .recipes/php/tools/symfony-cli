@@ -2,20 +2,9 @@
 
 # https://symfony.com/download
 
-###
-# ENV
-###
-echo "Usage: $0";
 
-eval set -- $(getopt -o '' --long help:,desc: -- "$@")
-while true; do case "$1" in
-    --desc)        echo "desc"; shift;;
-    --help)        echo "help"; shift;;
-    --)            shift; break;;
-esac; done
-### -env
 
-which curl || apt install -y curl
+apt install -y curl
 
 curl -sS https://get.symfony.com/cli/installer | bash
 mv /root/.symfony5/bin/symfony /usr/local/bin/symfony

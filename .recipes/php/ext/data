@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
-# data
-docker-php-ext-install \
-    dba \
-    pdo \
-    pdo_mysql \
-    pdo_odbc \
-    pdo_pgsql \
-    pdo_sqlite
+###
+# PEAR package manager is installed with PHP
+# PECL package manager is installed with PHP
+###
+
+# https://pecl.php.net/packages.php
+# "doc.php.net"
+# "pear.php.net"
+# "pecl.php.net"
+
+pecl update-channels
+
+yes 'n' | pecl install -f ds
+echo "extension=ds.so" > /usr/local/etc/php/conf.d/ds.ini
 
 php -m

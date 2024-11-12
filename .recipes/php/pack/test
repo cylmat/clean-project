@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PHP_DIR="${SCRIPT_DIR}/../php"
 
-${PHP_DIR} infection
-${PHP_DIR} parallel
+
+composer require --dev \
+    brianium/paratest \
+    behat/behat \
+    pestphp/pest \
+    phpspec/phpspec \
+    phpunit/phpunit \
+    phpunitgen/console \
+    sebastian/phpcpd 
+    

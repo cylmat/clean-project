@@ -21,10 +21,10 @@ services:
             args:
                 IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
         command: sleep infinity
-        ports: 
-            - ${MAIN_SERVER_PORTS:-80:80}
         volumes:
             - .:/var/www
+        ports: 
+            - ${MAIN_SERVER_PORTS:-80:80}
 
 
 include:

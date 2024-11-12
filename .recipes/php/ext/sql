@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# data
-docker-php-ext-install pdo_mysql pdo_sqlite
-
-php -m

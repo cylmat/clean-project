@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# data
+docker-php-ext-install \
+    dba \
+    pdo \
+    pdo_mysql \
+    pdo_odbc \
+    pdo_pgsql \
+    pdo_sqlite
+pdo_mysql pdo_sqlite
+php -m

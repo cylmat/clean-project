@@ -2,3 +2,5 @@ services:
 
     ubuntu:
         image: ubuntu
+        ports: 
+            - ${UBUNTU_PORTS:-80:80}

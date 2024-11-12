@@ -2,3 +2,5 @@ services:
 
     node:
         image: node
+        ports: 
+            - ${NODE_PORTS:-80:80}

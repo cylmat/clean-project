@@ -44,7 +44,7 @@ list() {
 ### INSTALL ###
 ###############
 
-INSTALL_SCRIPTS_LIST=$(find ${RECIPES_DIR} -type f | sort | sed -e 's#^.*.recipes/##g')
+INSTALL_SCRIPTS_LIST=$(find ${RECIPES_DIR} -type f | sort | grep -v 'init_main_' | sed -e 's#^.*.recipes/##g')
 
 if [[ -z "$@" ]]; then display_usage;
 

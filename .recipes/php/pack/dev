@@ -2,19 +2,6 @@
 
 
 composer require --dev \
+    kint-php/kint \
     symfony/maker-bundle
 
-# @todo put these in correct recipe
-composer require --dev \
-    brianium/paratest \
-    behat/behat \
-    friends-of-phpspec/phpspec-code-coverage \
-    kint-php/kint \
-    nikic/php-parser \
-    pestphp/pest \
-    phpro/grumphp \
-    phpspec/phpspec \
-    phpunit/phpunit \
-    phpunitgen/console \
-    sebastian/phpcpd \
-    squizlabs/php_codesniffer

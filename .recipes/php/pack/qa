@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PHP_DIR="${SCRIPT_DIR}/../php"
 
-${PHP_DIR}/csfixer
-${PHP_DIR}/phan
-${PHP_DIR}/phpmd
-${PHP_DIR}/phpstan
-${PHP_DIR}/psalm
+
+composer require --dev \
+    friends-of-phpspec/phpspec-code-coverage \
+    nikic/php-parser \
+    phpro/grumphp \
+    squizlabs/php_codesniffer
+
+
+
+# ${PHP_DIR}/csfixer
+# ${PHP_DIR}/phan
+# ${PHP_DIR}/phpmd
+# ${PHP_DIR}/phpstan
+# ${PHP_DIR}/psalm
