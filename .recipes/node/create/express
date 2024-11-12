@@ -12,8 +12,7 @@ cd express_project
 npm install
 chmod 777 -R .
 
-DEBUG=express-project:* npm start
-
+# DEBUG=express-project:* npm start
 
 
 ################

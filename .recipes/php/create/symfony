@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+echo "Installing Symfony project...";
+
+
+###
+# DEPENDENCIES
+#  php/composer
+#  php/symfony-cli
+###
+
+# CREATE
+symfony new symfony_project
+
+cd symfony_project
+
+echo ""
+echo "Use this in case of Apache Http server:"
+echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony_project/public/.htaccess"
+
+# MAKE
+echo <<EOF
+composer req --dev symfony/maker-bundle
+chmod a+w -R . 
+echo 'Test' | bin/console make:controller
+cd ..
+EOF
+
+# # INFO
+
+echo "Run :"
+echo "symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=80 -d"
+echo "Access test page on http://localhost:80/test"
+
+
+

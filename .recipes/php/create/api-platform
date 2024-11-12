@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# https://api-platform.com
+# https://api-platform.com/docs/symfony/#installing-the-framework
+
+###
+# NEED
+#
+# phpext.db (sql)
+# composer
+###
+
+# RUN
+symfony new project-api
+
+cd project-api
+
+### Use api-platform/api-pack & symfony/orm-pack
+echo 'y' | symfony composer require api
+
+# @todo better way to handle this
+chmod 777 -R .
+
+symfony console doctrine:database:create
+symfony console doctrine:schema:create
+
+cd..
+
+### MODIFY DATABASE URL IN .ENV
+
+echo "Run to launch the api server:"
+echo "symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=80 -d "

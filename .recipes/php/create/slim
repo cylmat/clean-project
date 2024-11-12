@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+composer create-project slim/slim-skeleton slim-app
+
+echo "cd slim-app"
+echo "php -S localhost:8080 -t public"

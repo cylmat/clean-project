@@ -1,0 +1,18 @@
+Bash options
+```
+###
+# ENV
+###
+echo "Usage: $0 --project-dir <project_dir>";
+
+PROJECT_DIR=api-platform
+
+eval set -- $(getopt -o '' --long project-dir:,help:,desc: -- "$@")
+while true; do case "$1" in
+    --desc)        echo "desc"; shift;;
+    --project-dir) echo "Api project directory created in $2"; PROJECT_DIR="$2"; shift 2;;
+    --help)        echo "help"; shift;;
+    --)            shift; break;;
+esac; done
+### -env
+```
