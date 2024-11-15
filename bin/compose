@@ -34,10 +34,6 @@ _merge_dotenv_files() {
     COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml"
   fi
 
-  if [[ -f ./compose.override.yml.dist ]]; then
-    COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml.dist"
-  fi
-
   if [[ -f ./compose.override.yml.local ]]; then
     COMPOSE_FILE="${COMPOSE_FILE} -f compose.override.yml.local"
   fi

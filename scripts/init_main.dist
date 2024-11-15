@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-# COPY THIS SAMPLE FILE TO "init_main_recipes.local"
+# COPY THIS SAMPLE FILE TO "init_main.local"
 # to automatically load it in Dockerfile with "bin/compose"
 ###
 
