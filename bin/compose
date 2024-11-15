@@ -6,14 +6,14 @@ display_usage() {
 Usage:
   run [command]
 HELP
-  help    |h
+  help    \t|h
 DOCKER COMPOSE
-  build
+  build   \t|b
   upnobuild
-  up|start
-  down|stop
-  reload
-  connect|co";
+  up      \t|start
+  down    \t|stop
+  reload  \t|r
+  connect \t|co";
 }
 
 ##############
@@ -48,7 +48,7 @@ _remove_merged_dotenv() {
 
 build_container() {
   _merge_dotenv_files
-  docker compose --env-file=${ENVMERGED_FILE} -f ${COMPOSE_FILE} build
+  docker compose --env-file=${ENVMERGED_FILE} -f ${COMPOSE_FILE} --progress=plain build 
 }
 
 upbuild_container() {

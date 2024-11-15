@@ -28,8 +28,8 @@ RUN git config --global user.name "Your Name"
 COPY .recipes /usr/local/.recipes
 COPY scripts  /usr/local/scripts
 RUN chmod a+x /usr/local/.recipes /usr/local/scripts
-RUN if test -f /usr/local/scripts/init_main;       then sh /usr/local/scripts/init_main; fi
-RUN if test -f /usr/local/scripts/init_main.local; then sh /usr/local/scripts/init_main.local; fi
+RUN test -f /usr/local/scripts/init_main       && bash /usr/local/scripts/init_main       || true
+RUN test -f /usr/local/scripts/init_main.local && bash /usr/local/scripts/init_main.local || true
 
 # Dir
 WORKDIR /var/www

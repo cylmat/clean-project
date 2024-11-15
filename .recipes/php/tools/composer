@@ -4,7 +4,7 @@
 
 echo "Installing Composer...";
 
-which curl || apt install -y curl
+apt install -y curl
 
 curl -sS https://raw.githubusercontent.com/cylmat/docs/refs/heads/main/install/script/composer-install.sh | bash
 mv ./composer.phar /usr/local/bin/composer

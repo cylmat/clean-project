@@ -3,7 +3,6 @@
 # https://symfony.com/download
 
 
-
 apt install -y curl
 
 curl -sS https://get.symfony.com/cli/installer | bash
