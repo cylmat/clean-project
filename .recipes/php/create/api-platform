@@ -4,29 +4,51 @@
 # https://api-platform.com/docs/symfony/#installing-the-framework
 
 ###
-# NEED
-#
-# phpext.db (sql)
-# composer
+# NEED dependencies
 ###
 
-# RUN
+# FG_YELLOW="\e[33m"
+# FG_BLUE="\e[34m"
+# FG_CYAN="\e[36m"
+# NO_COLOR="\e[0m"
+
+display_info_block
+
+# Use api-platform/api-pack & symfony/orm-pack
+
+echo -e "
+1. Check pdo_mysql or pdo_postgres is installed with $FG_CYAN  
+bin/install php/ext/database $NO_COLOR
+
+2. Run $FG_CYAN 
 symfony new project-api
+cd project-api $NO_COLOR
 
-cd project-api
+3. Run $FG_CYAN 
+symfony composer require api $NO_COLOR $FG_YELLOW
 
-### Use api-platform/api-pack & symfony/orm-pack
-echo 'y' | symfony composer require api
+Modify your DATABASE_URL config in .env
+Configure the driver and server_version in config/packages/doctrine.yaml $NO_COLOR
+
+4. Run $FG_CYAN
+php bin/console make:entity --api-resource $NO_COLOR
+"
 
 # @todo better way to handle this
-chmod 777 -R .
+# chmod 777 -R .
 
-symfony console doctrine:database:create
-symfony console doctrine:schema:create
+# CHANGE DATABASE TO MYSQL
 
-cd..
+# symfony console doctrine:database:create
+# symfony console doctrine:schema:create
 
-### MODIFY DATABASE URL IN .ENV
+echo ' 
+Run to launch the api server: 
+export PORT=80 
+symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=${PORT} -d
+Go to http://localhost:${PORT}/api
 
-echo "Run to launch the api server:"
-echo "symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=80 -d "
+symfony server:log
+symfony server:list
+symfony server:stop --dir=project-api
+'

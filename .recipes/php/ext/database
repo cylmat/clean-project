@@ -8,5 +8,6 @@ docker-php-ext-install \
     pdo_odbc \
     pdo_pgsql \
     pdo_sqlite
-pdo_mysql pdo_sqlite
+
+
 php -m
