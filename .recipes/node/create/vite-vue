@@ -3,7 +3,6 @@
 # https://vite.dev
 
 npm create vite@latest vue-app -- --template vue
-chmod 777 -R .
 
 # 
 # or

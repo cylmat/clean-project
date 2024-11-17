@@ -3,52 +3,51 @@
 # https://api-platform.com
 # https://api-platform.com/docs/symfony/#installing-the-framework
 
-###
-# NEED dependencies
-###
-
-# FG_YELLOW="\e[33m"
-# FG_BLUE="\e[34m"
-# FG_CYAN="\e[36m"
-# NO_COLOR="\e[0m"
+FG_YELLOW="\e[33m"
+FG_CYAN="\e[36m"
+NO_COLOR="\e[0m"
 
 display_info_block
 
 # Use api-platform/api-pack & symfony/orm-pack
 
 echo -e "
-1. Check pdo_mysql or pdo_postgres is installed with $FG_CYAN  
+# 1. Check pdo_mysql or pdo_postgres is installed with $FG_CYAN  
 bin/install php/ext/database $NO_COLOR
 
-2. Run $FG_CYAN 
+# 2. Run $FG_CYAN 
 symfony new project-api
 cd project-api $NO_COLOR
 
-3. Run $FG_CYAN 
-symfony composer require api $NO_COLOR $FG_YELLOW
+# 3. Run $FG_CYAN 
+symfony composer require api --no-interaction $NO_COLOR $FG_YELLOW
 
-Modify your DATABASE_URL config in .env
-Configure the driver and server_version in config/packages/doctrine.yaml $NO_COLOR
+ - doctrine/doctrine-bundle:
+Modify your DATABASE_URL config in project's .env $NO_COLOR
 
-4. Run $FG_CYAN
+# 4. Run $FG_CYAN
+- api-platform/symfony:
+Create API resource in src/ApiResource:
+composer require symfony/maker-bundle --dev
 php bin/console make:entity --api-resource $NO_COLOR
+
+# 5. Run  $FG_CYAN
+symfony console doctrine:database:create
+symfony console doctrine:schema:create $NO_COLOR
+
+Go to project parent directory: $FG_CYAN
+cd .. $NO_COLOR
 "
 
-# @todo better way to handle this
-# chmod 777 -R .
-
-# CHANGE DATABASE TO MYSQL
-
-# symfony console doctrine:database:create
-# symfony console doctrine:schema:create
-
-echo ' 
+echo -e "$FG_YELLOW"
+echo '
 Run to launch the api server: 
 export PORT=80 
 symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=${PORT} -d
-Go to http://localhost:${PORT}/api
+Go to http://localhost:${PORT}/api 
 
 symfony server:log
 symfony server:list
 symfony server:stop --dir=project-api
 '
+echo -e "$NO_COLOR"

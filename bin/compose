@@ -5,15 +5,14 @@ display_usage() {
     echo "\
 Usage:
   run [command]
-HELP
-  help    \t|h
-DOCKER COMPOSE
-  build   \t|b
+COMMAND
+  help      h
+  build     b
   upnobuild
-  up      \t|start
-  down    \t|stop
-  reload  \t|r
-  connect \t|co";
+  up        start
+  down      stop
+  reload    r
+  connect   co";
 }
 
 ##############
@@ -92,5 +91,6 @@ for opt in "$@"; do
     reload)        reload_container;;
     co|connect)    connect_container;;
     help|h|--help) display_usage;;
+    *)             display_usage;;
   esac
 done

@@ -5,7 +5,6 @@
 npm create vite@latest react-app -- --template react
 
 cd react-app
-chmod 777 -R .
 npm install
 
 
@@ -15,4 +14,3 @@ echo 'Run: "npm run dev"'
 # or
 #
 # npx create-react-app react-app
-# chmod 777 -R react-app
