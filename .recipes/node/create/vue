@@ -2,23 +2,19 @@
 
 # https://vite.dev
 
+FG_RED="\e[31m"
 FG_YELLOW="\e[33m"
 FG_CYAN="\e[36m"
 NO_COLOR="\e[0m"
 
 display_info_block
-
 echo -e "$FG_YELLOW How to create VUE project $NO_COLOR"
 
 echo -e "$FG_CYAN 
-npm create vite@latest vue-app  $NO_COLOR"
+npm create vite@latest vue-app  -- --template vue $NO_COLOR"
 
-# npm create vite@latest vue-app -- --template vue
-# 
 # or
-#
 # yarn create vite my-vue-app --template vue
-
 
 
 ###
@@ -30,7 +26,8 @@ npm install $NO_COLOR"
 
 ### npm 7+, extra double-dash is needed:
 echo -e "$FG_YELLOW
-export PORT=80
+export PORT=80 $FG_RED
+on npm 7+, extra double-dash -- is needed $FG_YELLOW
 npm run dev -- --host 0.0.0.0 --port \$PORT $NO_COLOR
 OR $FG_YELLOW
 npx vite --host 0.0.0.0 --port \$PORT $NO_COLOR

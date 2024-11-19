@@ -5,7 +5,6 @@ FG_CYAN="\e[36m"
 NO_COLOR="\e[0m"
 
 display_info_block
-
 echo -e "$FG_YELLOW How to install Symfony project... $NO_COLOR";
 
 # CREATE
