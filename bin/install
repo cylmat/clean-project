@@ -14,7 +14,7 @@ display_usage() {
     echo "\
 Usage:
   [command]
-For autocompletion, run 'source install'
+For autocompletion, run 'source bin/install'
   help              h       show list of commands
   list              ls
   [command]         install specific script from '$RECIPES_DIR' directory";
@@ -37,7 +37,6 @@ complete -o nospace -F _load bin/install
 list() {
   echo -e "\n*** List of available scripts in '${YELLOW}$RECIPES_DIR${NOCOLOR}' directory ***"
   echo -e "${BLUE}$INSTALL_SCRIPTS_LIST${NOCOLOR}"
-  echo ""
 }
 
 ###############
@@ -50,9 +49,7 @@ if [[ -z "$@" ]]; then display_usage;
 
 elif [[ "help" == "$@" ]]; then display_usage;
 
-elif [[ "list" == "$@" ]]; then list;
-
-elif [[ "ls" == "$@" ]]; then list;
+elif [[ "list" == "$@" || "ls" == "$@" || "_shortlist" == "$@" ]]; then list;
 
 # run recipe
 else let o; o="$@"; sh -c "$RECIPES_DIR/$o"; fi
