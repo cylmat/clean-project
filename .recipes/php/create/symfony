@@ -1,36 +1,34 @@
 #!/usr/bin/env bash
 
-echo "Installing Symfony project...";
+FG_YELLOW="\e[33m"
+FG_CYAN="\e[36m"
+NO_COLOR="\e[0m"
 
+display_info_block
 
-###
-# DEPENDENCIES
-#  php/composer
-#  php/symfony-cli
-###
+echo -e "$FG_YELLOW How to install Symfony project... $NO_COLOR";
 
 # CREATE
+echo "Run:"
+echo -e "$FG_CYAN
 symfony new symfony_project
+cd symfony_project $NO_COLOR"
 
-cd symfony_project
-
-echo ""
-echo "Use this in case of Apache Http server:"
-echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony_project/public/.htaccess"
+# echo "Use this in case of Apache Http server:"
+# echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony_project/public/.htaccess"
 
 # MAKE
-echo <<EOF
+echo -e "$FG_CYAN
 composer req --dev symfony/maker-bundle
-chmod a+w -R . 
 echo 'Test' | bin/console make:controller
-cd ..
-EOF
+cd .. $NO_COLOR"
 
-# # INFO
+# INFO
 
-echo "Run :"
-echo "symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=80 -d"
-echo "Access test page on http://localhost:80/test"
+echo -e "$FG_YELLOW"
+echo 'Run :
+export PORT=80
+symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=$PORT -d
+Access test page on http://0.0.0.0:$PORT/test'
 
-
-
+echo -e "$NO_COLOR"

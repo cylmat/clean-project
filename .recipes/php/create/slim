@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
-composer create-project slim/slim-skeleton slim-app
+FG_YELLOW="\e[33m"
+FG_CYAN="\e[36m"
+NO_COLOR="\e[0m"
 
-echo "cd slim-app"
-echo "php -S localhost:8080 -t public"
+display_info_block
+
+echo -e "$FG_YELLOW How to install Slim project... $NO_COLOR";
+
+echo -e "$FG_CYAN
+composer create-project slim/slim-skeleton slim-app $NO_COLOR $FG_CYAN"
+
+echo '
+export PORT=80 
+php -S 0.0.0.0:${PORT} -t slim-app/public'
+echo -e "$NO_COLOR"

@@ -2,10 +2,14 @@
 
 # https://api-tools.getlaminas.org
 
-echo "Installing Laminas Api-Tools...";
 
-composer create-project laminas-api-tools/api-tools-skeleton api-tools
-cd api-tools
+### NOT WORKING ###
 
-echo "Run:"
-echo "php -S 0.0.0.0:8080 -t public public/index.php"
+
+# echo "Installing Laminas Api-Tools...";
+
+# composer create-project laminas-api-tools/api-tools-skeleton laminas-api-tools
+# cd api-tools
+
+# echo "Run:"
+# echo "php -S 0.0.0.0:8080 -t laminas-api-tools/public/index.php"

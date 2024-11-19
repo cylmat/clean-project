@@ -9,6 +9,8 @@ NO_COLOR="\e[0m"
 
 display_info_block
 
+echo -e "$FG_YELLOW How to install Api-Platform project... $NO_COLOR";
+
 # Use api-platform/api-pack & symfony/orm-pack
 
 echo -e "
