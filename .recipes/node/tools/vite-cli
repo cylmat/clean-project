@@ -2,6 +2,7 @@
 
 # https://vite.dev
 
-npm install -D vite
+### DOESN'T WORKS ###
 
-vite --version
+# npm install -D vite
+# vite --version

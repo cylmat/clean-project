@@ -41,15 +41,13 @@ Go to project parent directory: $FG_CYAN
 cd .. $NO_COLOR
 "
 
-echo -e "$FG_YELLOW"
-echo '
+echo -e "$FG_YELLOW
 Run to launch the api server: 
 export PORT=80 
-symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=${PORT} -d
-Go to http://localhost:${PORT}/api 
+symfony serve --dir=project-api --listen-ip=0.0.0.0 --port=\${PORT} -d
+Go to http://localhost:\${PORT}/api 
 
 symfony server:log
 symfony server:list
-symfony server:stop --dir=project-api
-'
-echo -e "$NO_COLOR"
+symfony server:stop --dir=project-api $NO_COLOR
+"

@@ -27,14 +27,16 @@ COPY .recipes /usr/local/.recipes
 COPY bin/install /usr/local/bin
 RUN cp /usr/local/scripts/display_info_block /usr/local/bin
 
+# USER init
+RUN echo 'root:root' | chpasswd
+RUN addgroup user --gid ${GID}
+RUN adduser user --uid ${UID} --gid ${GID} --gecos GECOS --disabled-password
+
 # Init
 RUN test -f /usr/local/scripts/init_main       && bash /usr/local/scripts/init_main       || true
 RUN test -f /usr/local/scripts/init_main.local && bash /usr/local/scripts/init_main.local || true
 
-# USER
-RUN echo 'root:root' | chpasswd
-RUN addgroup user --gid ${GID}
-RUN adduser user --uid ${UID} --gid ${GID} --gecos GECOS --disabled-password
+# USER select
 USER user:user
 RUN whoami
 

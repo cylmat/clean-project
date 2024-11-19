@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-.recipes/node/volta
+.recipes/node/tools/volta
 
 # install Node
 volta install node

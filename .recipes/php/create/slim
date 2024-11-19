@@ -9,9 +9,8 @@ display_info_block
 echo -e "$FG_YELLOW How to install Slim project... $NO_COLOR";
 
 echo -e "$FG_CYAN
-composer create-project slim/slim-skeleton slim-app $NO_COLOR $FG_CYAN"
+composer create-project slim/slim-skeleton slim-app $NO_COLOR"
 
-echo '
+echo -e "$FG_YELLOW
 export PORT=80 
-php -S 0.0.0.0:${PORT} -t slim-app/public'
-echo -e "$NO_COLOR"
+php -S 0.0.0.0:\${PORT} -t slim-app/public $NO_COLOR"

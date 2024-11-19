@@ -25,10 +25,7 @@ cd .. $NO_COLOR"
 
 # INFO
 
-echo -e "$FG_YELLOW"
-echo 'Run :
+echo -e "$FG_YELLOW Run :
 export PORT=80
-symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=$PORT -d
-Access test page on http://0.0.0.0:$PORT/test'
-
-echo -e "$NO_COLOR"
+symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=\$PORT -d
+Access test page on http://0.0.0.0:\$PORT/test $NO_COLOR"
