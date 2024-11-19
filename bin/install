@@ -35,7 +35,7 @@ _load() {
 complete -o nospace -F _load bin/install
 
 list() {
-  echo -e "\n*** List of available scripts in '${YELLOW}$RECIPES_DIR${NOCOLOR}' directory ***"
+  echo -e "\n*** List of available scripts in '${YELLOW}$RECIPES_DIR${NOCOLOR}' directory ***\n"
   echo -e "${BLUE}$INSTALL_SCRIPTS_LIST${NOCOLOR}"
 }
 
@@ -49,7 +49,9 @@ if [[ -z "$@" ]]; then display_usage;
 
 elif [[ "help" == "$@" ]]; then display_usage;
 
-elif [[ "list" == "$@" || "ls" == "$@" || "_shortlist" == "$@" ]]; then list;
+elif [[ "list" == "$@" || "ls" == "$@" ]]; then list;
+
+elif [[ "_shortlist" == "$@" ]]; then echo $INSTALL_SCRIPTS_LIST;
 
 # run recipe
 else let o; o="$@"; sh -c "$RECIPES_DIR/$o"; fi
