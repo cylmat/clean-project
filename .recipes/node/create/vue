@@ -27,8 +27,8 @@ npm install $NO_COLOR"
 ### npm 7+, extra double-dash is needed:
 echo -e "$FG_YELLOW
 export PORT=80 $FG_RED
-on npm 7+, extra double-dash -- is needed $FG_YELLOW
+# on npm 7+, extra double-dash -- is needed $FG_YELLOW
 npm run dev -- --host 0.0.0.0 --port \$PORT $NO_COLOR
-OR $FG_YELLOW
-npx vite --host 0.0.0.0 --port \$PORT $NO_COLOR
+# OR $FG_YELLOW
+# npx vite --host 0.0.0.0 --port \$PORT $NO_COLOR
 cd .."

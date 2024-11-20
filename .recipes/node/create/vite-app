@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# https://create-react-app.dev
+# https://vite.dev
 
 FG_RED="\e[31m"
 FG_YELLOW="\e[33m"
@@ -8,21 +8,27 @@ FG_CYAN="\e[36m"
 NO_COLOR="\e[0m"
 
 display_info_block
-echo -e "$FG_YELLOW How to create REACT project $NO_COLOR"
+echo -e "$FG_YELLOW How to create VITE project $NO_COLOR"
 
 echo -e "$FG_CYAN 
-npm create vite@latest react-app -- --template react $NO_COLOR"
+npm create vite@latest vite-app   $NO_COLOR"
 
 # or
-# npx create-react-app react-app
+# yarn create vite my-vue-app --template vue
 
+
+###
+### Load project
+###
 echo -e "$FG_CYAN
-cd react-app
+cd vite-app
 npm install $NO_COLOR"
 
-
+### npm 7+, extra double-dash is needed:
 echo -e "$FG_YELLOW
 export PORT=80 $FG_RED
 # on npm 7+, extra double-dash -- is needed $FG_YELLOW
 npm run dev -- --host 0.0.0.0 --port \$PORT $NO_COLOR
+# OR $FG_YELLOW
+# npx vite --host 0.0.0.0 --port \$PORT $NO_COLOR
 cd .."

@@ -3,4 +3,24 @@
 # https://nextjs.org/
 
 
-npx create-next-app@latest
+FG_RED="\e[31m"
+FG_YELLOW="\e[33m"
+FG_CYAN="\e[36m"
+NO_COLOR="\e[0m"
+
+display_info_block
+echo -e "$FG_YELLOW How to create NEXT project $NO_COLOR"
+
+echo -e "$FG_CYAN
+npx create-next-app@latest  next-app $NO_COLOR"
+
+
+echo -e "$FG_CYAN
+cd next-app
+npm install $NO_COLOR"
+
+
+echo -e "$FG_YELLOW
+export PORT=80 
+npm run dev $NO_COLOR
+cd .."

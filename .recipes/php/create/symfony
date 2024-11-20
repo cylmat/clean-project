@@ -10,11 +10,11 @@ echo -e "$FG_YELLOW How to install Symfony project... $NO_COLOR";
 # CREATE
 echo "Run:"
 echo -e "$FG_CYAN
-symfony new symfony_project
-cd symfony_project $NO_COLOR"
+symfony new symfony-app
+cd symfony-app $NO_COLOR"
 
 # echo "Use this in case of Apache Http server:"
-# echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony_project/public/.htaccess"
+# echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony-app/public/.htaccess"
 
 # MAKE
 echo -e "$FG_CYAN
@@ -26,5 +26,5 @@ cd .. $NO_COLOR"
 
 echo -e "$FG_YELLOW Run :
 export PORT=80
-symfony local:server:start --dir=symfony_project --listen-ip=0.0.0.0 --port=\$PORT -d
+symfony local:server:start --dir=symfony-app --listen-ip=0.0.0.0 --port=\$PORT -d
 Access test page on http://0.0.0.0:\$PORT/test $NO_COLOR"
