@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# https://yeoman.io
+
+
+echo "npm install -g yo"
+echo "npm install -g generator-webapp"
+
+echo "# Create project"
+echo "yo webapp"
+echo "# yo webapp --help"
+
+echo "# Access home"
+echo "npm home generator-webapp"
+
+# sample
+# yo --generators
+# yo doctor
+# yo angular:controller MyNewController
