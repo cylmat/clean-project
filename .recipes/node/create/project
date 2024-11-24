@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# https://create-project.js.org
+
+
+echo "npm i -g create-js-project"
+
+# or yarn global add create-js-project
+
+echo  "create-js-project [project-name]"
+
+echo "npm init js-project [project-name]"
+
+# We provide you with a handful of templates out of the box:
+
+#   Browser - A basic template for projects that need to run in the browser.
+#   Express Static Server - A template for projects that run in the browser, powered by Express.
+#   Express HTTP Server - A basic template for an HTTP server, powered by Express.
+#   Express + React - An advanced template for projects based on React, powered by Express.
+#   Express + React + Redux - An advanced template for projects based on React and Redux, powered by Express.
+#   Node.js Static Server - A template for projects that run in the browser, powered by Node.js. 
+#   Node.js HTTP Server - A basic template for an HTTP server, powered by Node.js.
+#   Node.js + React - An advanced template for projects based on React, powered by Node.js.
+#   Node.js + React + Redux - An advanced template for projects based on React and Redux, powered by Node.js.
+#   React - A basic template for projects based on React.
+#   React + Redux - A template for projects based on React and Redux.
