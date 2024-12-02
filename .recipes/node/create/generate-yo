@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # https://yeoman.io
+# https://yeoman.io/generators/
 
 
 echo "npm install -g yo"
