@@ -3,4 +3,5 @@ services:
     node:
         image: node
         ports: 
-            - ${NODE_PORTS:-80:80}
+            - ${NODE_PORTS:-3000:3000}
+        command: sleep infinity

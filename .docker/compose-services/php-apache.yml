@@ -3,4 +3,4 @@ services:
     php-apache:
         image: php:apache
         ports: 
-            - ${APACHE_PORTS:-80:80}
+            - ${PHPAPACHE_PORTS:-80:80}

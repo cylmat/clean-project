@@ -1,0 +1,31 @@
+
+###
+# COPY THIS SAMPLE FILE TO "compose.override.yml.local"
+###
+
+include:
+
+    - .docker/compose-services/my_custom_service.yml
+
+##########
+# SERVER #
+##########
+
+    # - .docker/compose-services/node.yml
+    # - .docker/compose-services/php.yml
+    # - .docker/compose-services/php-apache.yml
+    # - .docker/compose-services/ubuntu.yml
+
+############
+# DATABASE #
+############
+
+    # - .docker/compose-services/mariadb.yml
+    # - .docker/compose-services/mysql.yml
+    # - .docker/compose-services/postgres.yml
+    # - .docker/compose-services/redis.yml
+
+    # DATABASE ADMIN #
+
+    # - .docker/compose-services/adminer-standalone.yml
+    # - .docker/compose-services/phpmyadmin.yml

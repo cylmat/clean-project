@@ -12,34 +12,36 @@
 services:
 
     # MAIN SERVER #
-    # Use bin/compose build
-    # Use docker build -e MAIN_SERVER_IMAGE=<image> -e MAIN_SERVER_PORTS=<ports>
+
     main_server:
-        container_name: main_server
         build:
             context: .
+            dockerfile: .docker/Dockerfile
             args:
                 IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
-        command: sleep infinity
         volumes:
-            - .:/var/www
+            - ./app:/var/www
         ports: 
             - ${MAIN_SERVER_PORTS:-80:80}
+        command: sleep infinity
 
+# include:
 
-include:
+#     - ./compose.override.yml.local
 
 ##########
 # SERVER #
 ##########
+
     # - .docker/compose-services/node.yml
     # - .docker/compose-services/php.yml
     # - .docker/compose-services/php-apache.yml
-    # - .docker/compose-services/ubuntu.yml 
+    # - .docker/compose-services/ubuntu.yml
 
 ############
 # DATABASE #
 ############
+
     # - .docker/compose-services/mariadb.yml
     # - .docker/compose-services/mysql.yml
     # - .docker/compose-services/postgres.yml
