@@ -3,31 +3,23 @@
 # https://expressjs.com
 # https://expressjs.com/fr/starter/installing.html
 
-FG_RED="\e[31m"
-FG_YELLOW="\e[33m"
-FG_CYAN="\e[36m"
-NO_COLOR="\e[0m"
 
-display_info_block
-echo -e "$FG_YELLOW How to create EXPRESS project $NO_COLOR"
-
-echo -e "$FG_CYAN
 npm install express --save -g
 npm install express-generator -g
+
+cd /var/www
 express express-app
 
 cd express-app
 npm install
-$NO_COLOR"
 
-echo -e "$FG_YELLOW  
-export PORT=80 
-DEBUG=express-project:* npm start $NO_COLOR"
+# DEBUG=express-project:* npm start
 
 
 ################
 ### ONE FILE ###
 ################
+
 # mkdir express
 # cd express
 # npm init

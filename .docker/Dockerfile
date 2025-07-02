@@ -2,8 +2,8 @@
 # ---
 # use docker image: php, php:apache, node, ubuntu...
 
-ARG IMAGE="ubuntu"
-FROM ${IMAGE} AS BASE
+ARG IMAGE=ubuntu
+FROM ${IMAGE}
 
 ENV UID=1000
 ENV GID=1000
@@ -21,20 +21,11 @@ RUN apt install -y \
     vim \
     zip
 
-# Copy
-COPY scripts  /usr/local/scripts
-COPY .recipes /usr/local/.recipes
-COPY bin/install /usr/local/bin
-RUN cp /usr/local/scripts/display_info_block /usr/local/bin
 
 # USER init
 RUN echo 'root:root' | chpasswd
 RUN addgroup user --gid ${GID}
 RUN adduser user --uid ${UID} --gid ${GID} --gecos GECOS --disabled-password
-
-# Init
-RUN test -f /usr/local/scripts/init_main       && bash /usr/local/scripts/init_main       || true
-RUN test -f /usr/local/scripts/init_main.local && bash /usr/local/scripts/init_main.local || true
 
 # USER select
 USER user:user

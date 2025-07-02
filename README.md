@@ -16,6 +16,13 @@ docker compose --env-file .env --env-file .env.local up --build -d
 docker compose down --remove-orphans
 ```
 
+For MERN project
+```shell
+export CONTAINER=main_server
+make install recipe=express
+# make express
+```
+
 ### Local Uncommited Overriding
 
 ```

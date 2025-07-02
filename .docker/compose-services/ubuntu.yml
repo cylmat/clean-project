@@ -4,4 +4,6 @@ services:
         image: ubuntu
         ports: 
             - ${UBUNTU_PORTS:-80:80}
+        volumes:
+            - ./app:/var/www
         command: sleep infinity
