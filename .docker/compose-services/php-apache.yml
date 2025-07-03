@@ -4,5 +4,6 @@ services:
         image: php:apache
         ports: 
             - ${PHPAPACHE_PORTS:-80:80}
-        volumes:
-            - ./app:/var/www
+        volumes: 
+            - ../../app:/var/www
+        working_dir: /var/www

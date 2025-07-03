@@ -11,7 +11,12 @@ RECIPE_PATH=$(shell find .recipes -type f -name $(RECIPE))
 BASEPATH=$(shell echo "$(RECIPE_PATH)" | rev | cut -d/ -f2- | rev)
 
 help:
-	@echo "Usage: make install container=container_name recipe=recipe_name args=recipe_args"
+	@echo "Usage:"
+	@echo ""
+	@echo "make up, make down, make reload"
+	@echo "export CONTAINER=container_name"
+	@echo "make install recipe=recipe_name args=recipe_args"
+
 
 ##########
 # DOCKER #
@@ -26,12 +31,6 @@ down:
 restart:
 	${MAKE} down && ${MAKE} up
 
-#######
-# RUN #
-#######
-express:
-	echo $(CONTAINER)
-#	docker exec $(CONTAINER) sh -c "DEBUG=express-project:* npm start"
 
 ###########
 # RECIPES #
@@ -44,3 +43,11 @@ install:
 
 list:
 	@find .recipes -type f
+
+
+#######
+# RUN #
+#######
+
+express:
+	docker exec $(CONTAINER) sh -c "cd express-app; DEBUG=express-app:* npm start"

@@ -5,7 +5,6 @@
 
 include:
 
-    - .docker/compose-services/my_custom_service.yml
 
 ##########
 # SERVER #

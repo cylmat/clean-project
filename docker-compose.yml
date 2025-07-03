@@ -9,26 +9,27 @@
 # MAIN #
 ########
 
-services:
+# services:
 
     # MAIN SERVER #
 
-    main_server:
-        container_name: main_server
-        build:
-            context: .
-            dockerfile: .docker/Dockerfile
-            args:
-                IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
-        volumes:
-            - ./app:/var/www
-        ports: 
-            - ${MAIN_SERVER_PORTS:-80:80}
-        command: sleep infinity
+    # main_server:
+    #     container_name: main_server
+    #     build:
+    #         context: .
+    #         dockerfile: .docker/Dockerfile
+    #         args:
+    #             IMAGE: ${MAIN_SERVER_IMAGE:-ubuntu}
+    #     volumes:
+    #         - ./app:/var/www
+    #     working_dir: /var/www
+    #     ports: 
+    #         - ${MAIN_SERVER_PORTS:-80:80}
+    #     command: sleep infinity
 
-# include:
+include:
 
-#     - ./compose.override.yml.local
+    - ./compose.override.yml.local
 
 ##########
 # SERVER #
