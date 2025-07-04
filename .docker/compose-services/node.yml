@@ -5,7 +5,9 @@ services:
         container_name: node
         ports: 
             - ${NODE_PORTS:-3000:3000}
+        command: sleep infinity
+
+        user: ${UID}:${GID}
+        working_dir: /var/www
         volumes: 
             - ../../app:/var/www
-        working_dir: /var/www
-        command: sleep infinity

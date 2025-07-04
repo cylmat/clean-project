@@ -18,7 +18,9 @@ docker compose down --remove-orphans
 
 For MERN project
 ```shell
-export CONTAINER=main_server
+export UID=$(id -u)
+export GID=$(id -g)
+export CONTAINER=node
 make install recipe=express
 # make express
 ```

@@ -4,8 +4,8 @@
 # https://expressjs.com/fr/starter/installing.html
 
 
-npm install express --save -g
-npm install express-generator -g
+echo 'root' | su -c "npm install express --save -g"
+echo 'root' | su -c "npm install express-generator -g"
 
 cd /var/www
 express express-app
