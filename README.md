@@ -2,34 +2,43 @@
 
 Clean installed directory for a new development project
 
-### Clone project in project dir
+### Clone and install project
 
 ```shell
 git clone https://github.com/cylmat/clean-project my_project
 cd my_project
-rm -r .git
+rm .git -rf
 ```
 
-Then run install script to help creating project:
+**E.g. for MERN (Mongo, Express, React, Node.js) project:**
+
+* Uncomment docker compose in compose.override.yml.local
+```
+include:
+    - .docker/compose-services/node.yml
+    - .docker/compose-services/mongo.yml
+```
+
+* Up docker containers
 ```shell
 docker compose --env-file .env --env-file .env.local up --build -d
 docker compose down --remove-orphans
+  or
+make up
+make down
+make restart
 ```
 
-For MERN project
+* Run install script to help creating project
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-export CONTAINER=node
-make install recipe=express
-# make express
+./bin/install express
 ```
 
-### Local Uncommited Overriding
-
-```
-RECIPES
-- in .recipes/init_main_recipes.local
+* Run container's server for node
+```shell
+make express
 ```
 
 ## Docs
