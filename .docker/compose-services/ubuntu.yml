@@ -2,6 +2,7 @@ services:
 
     ubuntu:
         image: ubuntu
+        container_name: ubuntu
         ports: 
             - ${UBUNTU_PORTS:-80:80}
         volumes: 

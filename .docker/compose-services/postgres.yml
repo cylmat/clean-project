@@ -2,6 +2,8 @@ services:
 
     postgres:
         image: postgres
+        container_name: postgres
+        restart: always
         ports: 
             - ${POSTGRES_PORTS:-5432:5432}
 

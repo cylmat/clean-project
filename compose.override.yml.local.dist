@@ -5,13 +5,11 @@
 
 include:
 
-
 ##########
 # SERVER #
 ##########
 
     # - .docker/compose-services/node.yml
-    # - .docker/compose-services/php.yml
     # - .docker/compose-services/php-apache.yml
     # - .docker/compose-services/ubuntu.yml
 
@@ -19,12 +17,9 @@ include:
 # DATABASE #
 ############
 
+    # - .docker/compose-services/adminer.yml
     # - .docker/compose-services/mariadb.yml
+    # - .docker/compose-services/mongo.yml
     # - .docker/compose-services/mysql.yml
     # - .docker/compose-services/postgres.yml
     # - .docker/compose-services/redis.yml
-
-    # DATABASE ADMIN #
-
-    # - .docker/compose-services/adminer-standalone.yml
-    # - .docker/compose-services/phpmyadmin.yml

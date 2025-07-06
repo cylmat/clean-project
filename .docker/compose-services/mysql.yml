@@ -4,6 +4,7 @@ services:
     mysql:
         image: mysql
         restart: always
+        container_name: mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_USER: ${MYSQL_USER:-root}
@@ -19,6 +20,16 @@ services:
         ##########
         # IMPORT : mysql database < script.sql
         ##########
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        environment: 
+            - PMA_ARBITRARY=1
+        ports: 
+            - ${PHPMYADMIN_PORTS:-8080:80}
+        depends_on:
+            - mysql
 
 volumes:
     mysql:

@@ -1,9 +1,0 @@
-services:
-
-    phpmyadmin:
-        image: phpmyadmin
-        restart: always
-        environment: 
-            - PMA_ARBITRARY=1
-        ports: 
-            - ${PHPMYADMIN_PORTS:-8080:80}

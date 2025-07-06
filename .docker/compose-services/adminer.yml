@@ -2,5 +2,6 @@ services:
 
     adminer:
         image: adminer:standalone
+        container_name: adminer
         ports: 
             - ${ADMINER_PORTS:-8080:80}

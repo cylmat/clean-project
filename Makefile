@@ -15,6 +15,8 @@ NODE_CONTAINER ?= node
 ##########
 
 up:
+	@if [ -z "$(UID)" ]; then echo "export UID=\$$(id -u)"; fi;
+	@if [ -z "$(GID)" ]; then echo "export GID=\$$(id -g)"; fi;
 	docker compose --env-file .env --env-file .env.local up --build -d
 
 down:

@@ -2,21 +2,21 @@
 
 # https://create-react-app.dev
 
-FG_RED="\e[31m"
-FG_YELLOW="\e[33m"
-FG_CYAN="\e[36m"
-NO_COLOR="\e[0m"
+# FG_RED="\e[31m"
+# FG_YELLOW="\e[33m"
+# FG_CYAN="\e[36m"
+# NO_COLOR="\e[0m"
 
-display_info_block
-echo -e "$FG_YELLOW How to create REACT project $NO_COLOR"
+# display_info_block
+# echo -e "$FG_YELLOW How to create REACT project $NO_COLOR"
 
-echo -e "$FG_CYAN 
+# echo -e "$FG_CYAN 
 npm create vite@latest react-app -- --template react $NO_COLOR"
 
 # or
 # npx create-react-app react-app
 
-echo -e "$FG_CYAN
+# echo -e "$FG_CYAN
 cd react-app
 npm install $NO_COLOR"
 
