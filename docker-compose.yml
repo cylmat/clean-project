@@ -35,20 +35,20 @@ include:
 # SERVER #
 ##########
 
-    # - .docker/compose-services/node.yml
-    # - .docker/compose-services/php-apache.yml
-    # - .docker/compose-services/ubuntu.yml
+    # - .docker/compose/node.yml
+    # - .docker/compose/php-apache.yml
+    # - .docker/compose/ubuntu.yml
 
 ############
 # DATABASE #
 ############
 
-    # - .docker/compose-services/adminer.yml
-    # - .docker/compose-services/mariadb.yml
-    # - .docker/compose-services/mongo.yml
-    # - .docker/compose-services/mysql.yml
-    # - .docker/compose-services/postgres.yml
-    # - .docker/compose-services/redis.yml
+    # - .docker/compose/adminer.yml
+    # - .docker/compose/mariadb.yml
+    # - .docker/compose/mongo.yml
+    # - .docker/compose/mysql.yml
+    # - .docker/compose/postgres.yml
+    # - .docker/compose/redis.yml
 
 ############
 # NETWORKS #
