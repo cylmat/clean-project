@@ -27,6 +27,13 @@ if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "help" ]]; then
   exit 0
 fi
 
+if [[ -z "$UID" || -z "$GID" ]]; then 
+  echo "Please run:"
+  echo "export UID=\$(id -u)";
+  echo "export GID=\$(id -g)";
+  exit 1
+fi
+
 RECIPE=$1
 CONTAINER=$2
 RECIPE_PATH=$(find .recipes -type f -name "${RECIPE}")

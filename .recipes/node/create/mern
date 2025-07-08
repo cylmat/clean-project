@@ -17,7 +17,6 @@ cd mern-app
 npm install express express mongoose dotenv cors body-parser
 npm install nodemon --save-dev
 
-
 # npm run dev
 
 
