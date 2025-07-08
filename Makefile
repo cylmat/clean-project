@@ -6,6 +6,7 @@
 
 # APP
 EXPRESS_APP ?= express-app
+MERN_APP ?= mern-app
 
 # CONTAINER
 NODE_CONTAINER ?= node
@@ -29,3 +30,7 @@ restart:
 
 express:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); DEBUG=$(EXPRESS_APP):* npm start"
+
+mern:
+	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/backend; npm run dev"
+	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/frontend; npm start"
