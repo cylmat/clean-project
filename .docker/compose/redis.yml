@@ -8,4 +8,4 @@ services:
             - ${REDIS_PORTS:-6379:6379}
 
 volumes:
-    redis:
+    redis-v:

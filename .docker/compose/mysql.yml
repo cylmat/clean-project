@@ -14,7 +14,7 @@ services:
         volumes:
             #- ../config/mysql/my.cnf:/etc/mysql/my.cnf:ro
             - ../fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
-            - mysql:/var/lib/mysql
+            - mysql-v:/var/lib/mysql
         ports: 
             - ${MYSQL_PORTS:-3306:3306}
         ##########
@@ -32,4 +32,4 @@ services:
             - mysql
 
 volumes:
-    mysql:
+    mysql-v:

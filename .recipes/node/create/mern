@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# https://dev.to/techcheck/creating-a-react-node-and-express-app-1ieg
 # https://medium.com/@jananis20011/mern-stack-full-project-setup-for-beginners-00a8a70ffe19
 
 
@@ -34,7 +33,7 @@ FRONTEND_PORT=3000
 ############## .env
 
 echo "
-MONGO_URI=mongodb://mongo:27017/mernDB
+MONGO_URI=mongodb://root:root@mongo:27017/mernDB?authSource=admin
 PORT=$BACKEND_PORT
 " > .env
 
@@ -100,6 +99,7 @@ npm install axios react-router-dom
 
 
 ############## App.js
+
 mv src/App.js src/App.js.bak
 
 echo <<EOF > src/App.js
@@ -134,4 +134,80 @@ jq ". += {\"proxy\": \"http://localhost:$BACKEND_PORT\"}" package.json > \
 
 ###
 # use NPM START
+###
+
+
+
+
+
+#############################################################################
+
+############## backend/UserModel.js
+
+# import mongoose from "mongoose";
+
+# const userSchema = mongoose.Schema({
+#   name: String,
+#   email: String,
+#   password: String
+# }, { timestamps: true });
+
+# export default mongoose.model("User", userSchema);
+
+
+############## backend/userRoute.js
+
+# import express from "express";
+# import User from "./UserModel.js";
+
+# const router = express.Router();
+
+# // Register User
+# router.post("/register", async (req, res) => {
+#   const { name, email, password } = req.body;
+#   try {
+#     const newUser = new User({ name, email, password });
+#     await newUser.save();
+#     res.status(201).json(newUser);
+#   } catch (err) {
+#     res.status(500).json({ error: err.message });
+#   }
+# });
+
+# // Get All Users
+# router.get("/", async (req, res) => {
+#   const users = await User.find();
+#   res.json(users);
+# });
+
+# export default router;
+
+
+############## backend/server.js
+
+# import userRoute from "userRoute.js";
+# app.use("/api/user", userRoute);
+
+
+############## frontend/App.js
+
+# const [users, setUsers] = useState([]);
+
+# useEffect(() => {
+#   axios.get("/api/user")
+#     .then((res) => setUsers(res.data))
+#     .catch((err) => console.error(err));
+# }, []);
+
+# <h1>MERN Stack App</h1>
+# <p>{message}</p>
+# <p>List of users:</p>
+# {users.map((user) => (
+#   <p key={user._id}>{user.name}: {user.email}</p>
+# ))}
+
+###
+# curl http://localhost:3000/api/user
+###
+# curl -X POST http://localhost:3000/api/user/register -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john.doe@example.com", "password": "securepassword123"}'
 ###
