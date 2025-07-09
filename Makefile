@@ -31,6 +31,8 @@ restart:
 express:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); DEBUG=$(EXPRESS_APP):* npm start"
 
-mern:
+mern-back:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/backend; npm run dev"
+
+mern-front:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/frontend; npm start"
