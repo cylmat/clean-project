@@ -6,6 +6,8 @@ services:
         restart: always
         ports: 
             - ${POSTGRES_PORTS:-5432:5432}
+        volumes:
+            - postgres-v:/var/lib/postgresql/data
 
 volumes:
     postgres-v:

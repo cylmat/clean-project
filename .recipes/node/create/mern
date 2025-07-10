@@ -2,69 +2,75 @@
 
 # https://medium.com/@jananis20011/mern-stack-full-project-setup-for-beginners-00a8a70ffe19
 
-
 cd /var/www
 mkdir mern-app
 cd mern-app
 
-
-###############
 ### BACKEND ###
-###############
+
+echo "-----------------------"
+echo "INSTALLING MERN BACKEND"
+echo "-----------------------"
 
 mkdir backend
-
+cd backend
 npm init -y
 npm install express express mongoose dotenv cors body-parser
 npm install nodemon --save-dev
+cd ..
 
 BACKEND_PORT=3001
 FRONTEND_PORT=3000
 
-
+###
 # express → Handles API requests
 # mongoose → Connects to MongoDB
 # dotenv → Loads environment variables
 # cors → Allows frontend to talk to backend
 # body-parser → Parses JSON data
 # nodemon → Restarts server automatically when files change
+###
 
+# $ npm run dev
+
+
+### FRONTEND ###
+
+echo "------------------------"
+echo "INSTALLING MERN FRONTEND"
+echo "------------------------"
+
+echo 'y' | npx create-react-app frontend
+cd frontend
+npm install axios react-router-dom
+cd ..
+
+###
+# npm start
+# npm run build
+# npm test
+# npm run eject
+###
+
+# $ npm start
+
+
+
+echo "-------------------"
+echo "CREATING DEMO FILES"
+echo "-------------------"
+
+###############
+### BACKEND ###
+###############
+
+cd backend
 
 ############## .env
 
-echo "
+cat <<EOF > .env
 MONGO_URI=mongodb://root:root@mongo:27017/mernDB?authSource=admin
 PORT=$BACKEND_PORT
-" > .env
-
-############## server.js
-
-echo <<EOF > server.js
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cors from "cors";
-
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || $BACKEND_PORT;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
-
-// Test Route
-app.get("/", (req, res) => {
-  res.send("API MERN is running...");
-});
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 EOF
 
 ############## package.json
@@ -77,41 +83,119 @@ jq '.scripts += {"start": "node server.js", "dev": "nodemon server.js"}' package
 
 jq '.type = "module"' package.json > /tmp/package.json && mv /tmp/package.json package.json
 
-###
-# use: NPM RUN DEV
-###
+############## server.js
 
+cat <<EOF > server.js
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import userRoute from "./userRoute.js";
 
+dotenv.config();
+const app = express();
+const PORT = process.env.PORT || $BACKEND_PORT;
+
+// Middleware
+app.use(cors());
+app.use(express.json()); // need to POST -H "Content-Type: application/json"
+app.use("/api/user", userRoute);
+
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
+
+// Test Route
+app.get("/", (req, res) => {
+  res.send("API MERN is running...");
+});
+
+app.listen(PORT, () => console.log(\`Server running on port ${PORT}\`));
+EOF
+
+############## userRoute.js
+
+cat <<EOF > userRoute.js
+import express from "express";
+import User from "./UserModel.js";
+
+const router = express.Router();
+
+// Register User
+router.post("/", async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const newUser = new User({ name, email, password });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get All Users
+router.get("/", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+export default router;
+EOF
+
+############## UserModel.js
+
+cat <<EOF > UserModel.js
+import mongoose from "mongoose";
+
+const userSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  password: String
+}, { timestamps: true });
+
+export default mongoose.model("User", userSchema);
+EOF
+
+cd ..
 
 ################
 ### FRONTEND ###
 ################
 
-cd ..
-echo 'y' | npx create-react-app frontend
 cd frontend
-npm install axios react-router-dom
 
-# npm start
-# npm run build
-# npm test
-# npm run eject
+############## package.json
 
+jq ". += {\"proxy\": \"http://localhost:$BACKEND_PORT\"}" package.json > \
+    /tmp/package.json && mv /tmp/package.json package.json
 
 ############## App.js
 
 mv src/App.js src/App.js.bak
 
-echo <<EOF > src/App.js
+cat <<EOF > src/App.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// Get users 
+// curl -X GET http://localhost:3000/api/user
+
+// Create user
+// curl -X POST http://localhost:3000/api/user -d '{"name":"John Doe","email":"jdoe@me.com","password":"password"}'
+
 function App() {
   const [message, setMessage] = useState("");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:$BACKEND_PORT/")
       .then((res) => setMessage(res.data))
+      .catch((err) => console.error(err));
+
+     axios.get("/api/user")
+      .then((res) => setUsers(res.data))
       .catch((err) => console.error(err));
   }, []);
 
@@ -119,6 +203,10 @@ function App() {
     <div>
       <h1>MERN Stack App</h1>
       <p>{message}</p>
+      <p>List of users:</p>
+      {users.map((user) => (
+        <p key={user._id}>{user.name}: {user.email}</p>
+      ))}
     </div>
   );
 }
@@ -126,88 +214,4 @@ function App() {
 export default App;
 EOF
 
-
-############## package.json
-
-jq ". += {\"proxy\": \"http://localhost:$BACKEND_PORT\"}" package.json > \
-    /tmp/package.json && mv /tmp/package.json package.json
-
-###
-# use NPM START
-###
-
-
-
-
-
-#############################################################################
-
-############## backend/UserModel.js
-
-# import mongoose from "mongoose";
-
-# const userSchema = mongoose.Schema({
-#   name: String,
-#   email: String,
-#   password: String
-# }, { timestamps: true });
-
-# export default mongoose.model("User", userSchema);
-
-
-############## backend/userRoute.js
-
-# import express from "express";
-# import User from "./UserModel.js";
-
-# const router = express.Router();
-
-# // Register User
-# router.post("/register", async (req, res) => {
-#   const { name, email, password } = req.body;
-#   try {
-#     const newUser = new User({ name, email, password });
-#     await newUser.save();
-#     res.status(201).json(newUser);
-#   } catch (err) {
-#     res.status(500).json({ error: err.message });
-#   }
-# });
-
-# // Get All Users
-# router.get("/", async (req, res) => {
-#   const users = await User.find();
-#   res.json(users);
-# });
-
-# export default router;
-
-
-############## backend/server.js
-
-# import userRoute from "userRoute.js";
-# app.use("/api/user", userRoute);
-
-
-############## frontend/App.js
-
-# const [users, setUsers] = useState([]);
-
-# useEffect(() => {
-#   axios.get("/api/user")
-#     .then((res) => setUsers(res.data))
-#     .catch((err) => console.error(err));
-# }, []);
-
-# <h1>MERN Stack App</h1>
-# <p>{message}</p>
-# <p>List of users:</p>
-# {users.map((user) => (
-#   <p key={user._id}>{user.name}: {user.email}</p>
-# ))}
-
-###
-# curl http://localhost:3000/api/user
-###
-# curl -X POST http://localhost:3000/api/user/register -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john.doe@example.com", "password": "securepassword123"}'
-###
+cd ..

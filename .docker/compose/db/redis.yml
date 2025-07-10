@@ -6,6 +6,8 @@ services:
         restart: always
         ports: 
             - ${REDIS_PORTS:-6379:6379}
+        volumes:
+            - redis-v:/data
 
 volumes:
     redis-v:

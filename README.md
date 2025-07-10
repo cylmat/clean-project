@@ -33,7 +33,7 @@ make restart
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install express
+./bin/install express node
 ```
 
 * Run container's server for node

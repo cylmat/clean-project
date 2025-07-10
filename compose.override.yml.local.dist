@@ -17,9 +17,8 @@ include:
 # DATABASE #
 ############
 
-    # - .docker/compose/adminer.yml
-    # - .docker/compose/mariadb.yml
-    # - .docker/compose/mongo.yml
-    # - .docker/compose/mysql.yml
-    # - .docker/compose/postgres.yml
-    # - .docker/compose/redis.yml
+    # - .docker/compose/db/adminer.yml
+    # - .docker/compose/db/mongo.yml
+    # - .docker/compose/db/mysql.yml
+    # - .docker/compose/db/postgres.yml
+    # - .docker/compose/db/redis.yml

@@ -2,7 +2,7 @@
 # Usage #
 #########
 
-.PHONY: down help restart up
+.PHONY: clear-volumes down help restart up
 
 # APP
 EXPRESS_APP ?= express-app
@@ -24,6 +24,9 @@ down:
 restart:
 	${MAKE} down && ${MAKE} up
 
+clear-volumes:
+	docker volume rm $(shell docker volume ls -qf dangling=true)
+
 #######
 # RUN #
 #######
@@ -36,3 +39,8 @@ mern-back:
 
 mern-front:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/frontend; npm start"
+
+mern-fixtures:
+	curl -X POST http://localhost:3000/api/user \
+		-H "Content-Type: application/json" \
+		-d '{"name":"John Doe2","email":"jdoe@me.com","password":"password"}'
