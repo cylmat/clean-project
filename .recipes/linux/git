@@ -2,7 +2,9 @@
 
 # https://git-scm.com
 
-echo "Installing Git...";
+echo "--------------"
+echo "Installing Git"
+echo "--------------"
 
 
 
@@ -13,6 +15,9 @@ apt install -y git
 GIT_CONFIGURE=0
 GIT_USER_NAME="Your Name"
 GIT_USER_EMAIL="you@example.com"
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
 
 
 # if [[ $GIT_CONFIGURE -eq 1 ]]; then

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+SYMFONY_APP=symfony-app
+
+if [[ "$1" == --project-name=* ]]; then
+  SYMFONY_APP="${1#--project-name=}"
+fi
+
+cd $SYMFONY_APP
+
+composer req --dev \
+    doctrine/doctrine-fixtures-bundle \
+    symfony/debug-bundle \
+    symfony/maker-bundle \
+    symfony/profiler-pack \
+    symfony/web-profiler-bundle

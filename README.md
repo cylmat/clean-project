@@ -67,8 +67,10 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install git php-apache
-./bin/install symfony-cli php-apache
+./bin/install_root git php-apache
+./bin/install_root composer php-apache
+./bin/install_root symfony-cli php-apache
+./bin/install symfony php-apache
 ```
 
 ## Docs

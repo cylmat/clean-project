@@ -2,7 +2,7 @@
 
 # Function to display help
 function show_help() {
-  echo "🛈 Usage: $0 <recipe> <container_name>"
+  echo "🛈 Usage: $0 <recipe> <container_name> --project_name=<project_name>"
   echo
   echo "Install 'recipe' in 'container_name'."
   echo "Example: $0 express node_container"
@@ -25,6 +25,10 @@ fi
 if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "help" ]]; then
   show_help
   exit 0
+fi
+
+if [[ "$3" == --project-name=* ]]; then
+  PROJECT_NAME="${3#--project-name=}"
 fi
 
 if [[ -z "$UID" || -z "$GID" ]]; then 
@@ -53,7 +57,10 @@ function install_recipe() {
   install_user
 	docker exec ${CONTAINER} sh -c "mkdir -m 755 -p /tmp/${BASEPATH}"
 	docker cp ${RECIPE_PATH} ${CONTAINER}:/tmp/${BASEPATH}/${RECIPE}
-	docker exec ${CONTAINER} sh -c "/tmp/${BASEPATH}/${RECIPE}"
+
+  CMD="/tmp/${BASEPATH}/${RECIPE}"
+  if [ -n "$PROJECT_NAME" ]; then CMD="$CMD --project-name=$PROJECT_NAME"; fi
+	docker exec ${CONTAINER} sh -c "$CMD"
 }
 
 install_recipe
