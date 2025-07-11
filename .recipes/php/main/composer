@@ -2,7 +2,9 @@
 
 # https://getcomposer.org
 
-echo "Installing Composer...";
+echo "-------------------"
+echo "Installing Composer"
+echo "-------------------"
 
 apt install -y curl
 

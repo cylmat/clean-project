@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-
-composer require --dev \
-    kint-php/kint \
-    symfony/maker-bundle
-

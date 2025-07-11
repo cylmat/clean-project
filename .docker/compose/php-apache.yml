@@ -5,6 +5,7 @@ services:
         container_name: php-apache
         ports: 
             - ${PHPAPACHE_PORTS:-80:80}
+        user: ${UID}:${GID}
         volumes: 
             - ../../app:/var/www
         working_dir: /var/www

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# https://git-scm.com
+
+echo "Installing Git...";
+
+
+
+apt update
+apt install -y git
+
+
+GIT_CONFIGURE=0
+GIT_USER_NAME="Your Name"
+GIT_USER_EMAIL="you@example.com"
+
+
+# if [[ $GIT_CONFIGURE -eq 1 ]]; then
+#     echo "Configuring Git...";
+
+#     git config --global --add safe.directory $(pwd)
+#     git config --local init.defaultBranch main
+#     git config --local user.name "${GIT_USER_NAME}"
+#     git config --local user.email "${GIT_USER_EMAIL}"
+# fi

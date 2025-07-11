@@ -3,10 +3,15 @@
 # https://symfony.com/download
 
 
+echo "----------------------"
+echo "Installing Symfony-cli"
+echo "----------------------"
+
+
 apt install -y curl
 
 curl -sS https://get.symfony.com/cli/installer | bash
-mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+mv $HOME/.symfony5/bin/symfony /usr/local/bin/symfony
 chmod a+x /usr/local/bin/symfony
 
 # curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash

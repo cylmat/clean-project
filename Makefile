@@ -34,6 +34,9 @@ clear-volumes:
 express:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); DEBUG=$(EXPRESS_APP):* npm start"
 
+sym-react:
+	echo "todo"
+
 mern-back:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/backend; npm run dev"
 
