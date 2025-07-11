@@ -9,6 +9,7 @@ include:
 # SERVER #
 ##########
 
+    # - .docker/compose/nginx.yml
     # - .docker/compose/node.yml
     # - .docker/compose/php-apache.yml
     # - .docker/compose/ubuntu.yml

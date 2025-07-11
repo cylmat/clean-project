@@ -1,0 +1,14 @@
+services:
+
+    nginx:
+        image: nginx
+        container_name: nginx
+        ports: 
+            - ${NGINX_PORTS:-80:80}
+        environment:
+            - NGINX_HOST=localhost
+            - NGINX_PORT=80
+        volumes:
+            - ../../app:/var/www
+            # - ./templates:/etc/nginx/templates
+        working_dir: /var/www
