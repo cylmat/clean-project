@@ -18,9 +18,5 @@ echo
 
 
 
-./bin/install git $CONTAINER
-./bin/install composer $CONTAINER
-./bin/install symfony-cli $CONTAINER
 
-./bin/install apache-config $CONTAINER --project-name=$PROJECT
 ./bin/install symfony-app $CONTAINER --project-name=$PROJECT

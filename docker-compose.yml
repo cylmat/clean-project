@@ -31,25 +31,6 @@ include:
 
     - ./compose.override.yml.local
 
-##########
-# SERVER #
-##########
-
-    # - .docker/compose/nginx.yml
-    # - .docker/compose/node.yml
-    # - .docker/compose/php-apache.yml
-    # - .docker/compose/ubuntu.yml
-
-############
-# DATABASE #
-############
-
-    # - .docker/compose/db/adminer.yml
-    # - .docker/compose/db/mongo.yml
-    # - .docker/compose/db/mysql.yml
-    # - .docker/compose/db/postgres.yml
-    # - .docker/compose/db/redis.yml
-
 ############
 # NETWORKS #
 ############
