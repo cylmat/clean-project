@@ -1,17 +1,16 @@
 services:
 
-    php-apache:
+    php:
         build: 
             dockerfile: ./php.Dockerfile
             args:
-                - IMAGE=php:apache
                 - UID=${UID:-1000}
                 - GID=${GID:-1000}
-        container_name: php-apache
+        container_name: php
+        command: sleep infinity
         ports: 
-            - ${PHPAPACHE_PORTS:-80:80}
+            - ${PHP_PORTS:-80:80}
         user: ${UID}:${GID}
         working_dir: /var/www
         volumes: 
             - ../../app:/var/www
-            - ../config/apache2/000-default.conf.local:/etc/apache2/000-default.conf

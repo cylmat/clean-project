@@ -1,7 +1,10 @@
-FROM php:apache
+ARG IMAGE=php
+
+FROM ${IMAGE}
 
 ARG UID=1000
 ARG GID=1000
+
 
 
 RUN apt update
@@ -18,6 +21,7 @@ RUN apt install -y \
     zip
 
 
+USER root
 
 ###############
 # Install git #
@@ -36,8 +40,6 @@ RUN git config --global user.name "Your Name"
 
 RUN git --version
 
-
-USER root
 
 ####################
 # Install composer #
@@ -67,14 +69,15 @@ RUN symfony -V
 
 
 
-
 # USER init #
 
 # debian-like
-RUN addgroup user --gid ${GID} && adduser user --uid ${UID} --gid ${GID} --gecos GECOS --disabled-password
+RUN addgroup user --gid "${GID}" && adduser user --uid "${UID}" --gid "${GID}" --gecos GECOS --disabled-password
 
 # linux-like
 # RUN groupadd --gid "${GID}" user && useradd --uid "${UID}" --gid "${GID}" --create-home --shell /bin/bash user
+
+USER user
 
 
 WORKDIR /var/www

@@ -48,17 +48,19 @@ make mern-frontend
 make mern-fixtures
 ```
 
-### Symfony React
+### Symfony + React
 
 * Uncomment docker compose in compose.override.yml.local
 ```
 include:
     - .docker/compose/node.yml
-    - .docker/compose/php-apache.yml
+    - .docker/compose/php.yml
     - .docker/compose/db/mysql.yml
 ```
 
 * Up docker containers
+
+- Change DocumentRoot in .docker/config/apache2/000-default.conf.local
 ```shell
 make up
 ```
@@ -67,7 +69,7 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install symfony-stack php-apache
+./bin/install symfony-app php
 ```
 
 ## Custom recipe
@@ -96,3 +98,4 @@ Node
 
 Back
 - https://slimframework.com
+- https://symfony.com
