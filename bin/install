@@ -77,7 +77,7 @@ function install_recipe() {
 
   # Check if recipe is a "stack" one, runned on host.
   if [[ "$RECIPE" =~ stack ]]; then
-    sh -c "$RECIPE_PATH --container-name=${CONTAINER}"
+    sh -c "$CMD"
     exit 0
   fi
 

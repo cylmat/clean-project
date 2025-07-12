@@ -7,9 +7,12 @@
 
 # https://getcomposer.org
 
-echo "-------------------"
-echo "Installing Composer"
-echo "-------------------"
+
+echo
+echo "----------------"
+echo "Install Composer"
+echo "----------------"
+echo
 
 
 cd /tmp

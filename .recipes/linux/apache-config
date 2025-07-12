@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#@AS_ROOT#
+
+
+echo
+echo "---------------------------"
+echo "Update Apache configuration"
+echo "---------------------------"
+echo
+
+
+PROJECT="html"
+
+
+for arg in "$@"; do
+    if [[ $arg == --project-name=* ]]; then PROJECT="${arg#--project-name=}"; fi;
+done
+
+echo "Update DocumentRoot to /var/www/$PROJECT"
+echo "---"
+
+sed -i -e "s#DocumentRoot .*#DocumentRoot /var/www/$PROJECT#" /etc/apache2/sites-enabled/000-default.conf
+
+cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+source /etc/apache2/envvars

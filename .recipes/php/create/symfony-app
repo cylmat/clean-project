@@ -8,18 +8,20 @@ for arg in "$@"; do
 done
 
 
-
+echo
 echo "------------------"
 echo "Create Symfony App"
 echo "------------------"
+echo
 
+
+echo "Create Symfony project: $PROJECT"
 
 # CREATE
 symfony new "$PROJECT"
 
 # echo "Use this in case of Apache Http server:"
 # echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony-app/public/.htaccess"
-
 
 
 # INFO

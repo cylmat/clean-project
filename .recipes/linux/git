@@ -4,12 +4,14 @@
 
 
 
-
 # https://git-scm.com
 
-echo "--------------"
-echo "Installing Git"
-echo "--------------"
+
+echo
+echo "-----------"
+echo "Install Git"
+echo "-----------"
+echo
 
 
 apt update
