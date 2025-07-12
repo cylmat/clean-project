@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
+#@AS_ROOT#
+
+
+
+
 # https://symfony.com/download
 
 
-echo "----------------------"
-echo "Installing Symfony-cli"
-echo "----------------------"
+echo "-------------------"
+echo "Install Symfony-cli"
+echo "-------------------"
 
 
 

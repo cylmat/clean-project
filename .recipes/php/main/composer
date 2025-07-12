@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#@AS_ROOT#
+
+
+
+
 # https://getcomposer.org
 
 echo "-------------------"
@@ -7,7 +12,7 @@ echo "Installing Composer"
 echo "-------------------"
 
 
-
+cd /tmp
 curl -sS https://raw.githubusercontent.com/cylmat/docs/refs/heads/main/install/script/composer-install.sh | bash
 mv ./composer.phar /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer

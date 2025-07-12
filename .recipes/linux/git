@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+#@AS_ROOT#
+
+
+
+
 # https://git-scm.com
 
 echo "--------------"
 echo "Installing Git"
 echo "--------------"
-
 
 
 apt update

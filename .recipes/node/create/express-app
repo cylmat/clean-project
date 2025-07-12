@@ -4,8 +4,9 @@
 # https://expressjs.com/fr/starter/installing.html
 
 
-su -c "npm install express --save"
-su -c "npm install express-generator"
+npm init -y
+npm install express express mongoose dotenv cors body-parser --save
+npm install nodemon --save-dev
 
 cd /var/www
 express express-app

@@ -1,14 +1,35 @@
 #!/usr/bin/env bash
 
-# Function to display help
+# Function to display help.
 function show_help() {
-  echo "🛈 Usage: $0 <recipe> <container_name> --project_name=<project_name>"
-  echo
+  echo "Usage: $0 <recipe> <container_name> [OPTION]"
   echo "Install 'recipe' in 'container_name'."
-  echo "Example: $0 express node_container"
+  echo
+  echo "Options:"
+  echo "  --project_name=<project_name>  Set the project name."
+  echo
+  echo "Examples:"
+  echo "  $0 express node   install 'express' recipe in 'node' container."
+  echo "  $0 list           list all available recipes."
 }
 
-# Check if the argument is provided
+function list_recipes() {
+  find .recipes -type f | sort
+  exit 0
+}
+
+# Check if the user asked for help.
+if [[ "$1" == "help" || "$@" =~ --help || "$@" =~ "-h" ]]; then
+  show_help
+  exit 0
+fi
+
+if [[ "$1" == "list" ]]; then
+  list_recipes
+  exit 0
+fi
+
+# Check if the argument is provided.
 if [ -z "$1" ]; then
   echo "❌ Error: No recipe provided."
   echo
@@ -21,16 +42,6 @@ elif [ -z "$2" ]; then
   exit 1
 fi
 
-# Check if the user asked for help
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "help" ]]; then
-  show_help
-  exit 0
-fi
-
-if [[ "$3" == --project-name=* ]]; then
-  PROJECT_NAME="${3#--project-name=}"
-fi
-
 if [[ -z "$UID" || -z "$GID" ]]; then 
   echo "Please run:"
   echo "export UID=\$(id -u)";
@@ -38,10 +49,17 @@ if [[ -z "$UID" || -z "$GID" ]]; then
   exit 1
 fi
 
+for arg in "$@"; do
+  if [[ $arg == --project-name=* ]]; then
+    PROJECT="${arg#--project-name=}"
+  fi
+done
+
 RECIPE=$1
 CONTAINER=$2
 RECIPE_PATH=$(find .recipes -type f -name "${RECIPE}")
 BASEPATH=$(echo "${RECIPE_PATH}" | rev | cut -d/ -f2- | rev)
+AS_ROOT_LABEL="#@AS_ROOT#"
 
 function install_user() {
   if [[ -z "${UID}" ]]; then echo "Please run export UID=\$(id -u)"; fi
@@ -54,13 +72,35 @@ function install_user() {
 function install_recipe() {
   if [ -z "${RECIPE_PATH}" ]; then echo "❌ Error: No recipe named '${RECIPE}' found."; fi
 
-  install_user
-	docker exec ${CONTAINER} sh -c "mkdir -m 755 -p /tmp/${BASEPATH}"
-	docker cp ${RECIPE_PATH} ${CONTAINER}:/tmp/${BASEPATH}/${RECIPE}
+  CMD="${BASEPATH}/${RECIPE} --container-name=${CONTAINER}"
+  if [[ ! -z "$PROJECT" ]]; then CMD="$CMD --project-name=$PROJECT"; fi
 
-  CMD="/tmp/${BASEPATH}/${RECIPE}"
-  if [ -n "$PROJECT_NAME" ]; then CMD="$CMD --project-name=$PROJECT_NAME"; fi
-	docker exec ${CONTAINER} sh -c "$CMD"
+  # Check if recipe is a "stack" one, runned on host.
+  if [[ "$RECIPE" =~ stack ]]; then
+    sh -c "$RECIPE_PATH --container-name=${CONTAINER}"
+    exit 0
+  fi
+
+  install_user
+	docker exec ${CONTAINER} sh -c "mkdir -p /tmp/${BASEPATH}"
+	docker cp --archive ${RECIPE_PATH} ${CONTAINER}:/tmp/${BASEPATH}/${RECIPE}
+  ##### docker exec ${CONTAINER} sh -c "chmod a+x -R /tmp/${BASEPATH}"
+
+  CMD="/tmp/$CMD" # Runned inside container
+
+  # Parse recipe to check if script run as root or user.
+  AS_ROOT=$(cat "$RECIPE_PATH" | grep -E "^$AS_ROOT_LABEL$" | wc -l)
+  if [[ "$AS_ROOT" == "1" ]]; then 
+    echo
+    echo "Runned as root: "
+    echo "$CMD"
+    docker exec -u root ${CONTAINER} sh -c "$CMD"
+  else
+    echo
+    echo "Runned as user: "
+    echo "$CMD"
+	  docker exec ${CONTAINER} sh -c "$CMD"
+  fi
 }
 
 install_recipe

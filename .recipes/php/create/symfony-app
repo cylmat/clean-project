@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
 
-echo "-----------------------"
-echo "Install Symfony project"
-echo "-----------------------"
+PROJECT=symfony-app
+
+for arg in "$@"; do
+    if [[ $arg == --project-name=* ]]; then PROJECT="${arg#--project-name=}"; fi;
+done
+
+
+
+echo "------------------"
+echo "Create Symfony App"
+echo "------------------"
 
 
 # CREATE
-symfony new symfony-app
+symfony new "$PROJECT"
 
 # echo "Use this in case of Apache Http server:"
 # echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony-app/public/.htaccess"

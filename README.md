@@ -38,7 +38,7 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install mern node
+./bin/install mern-stack node
 ```
 
 * Run container's server for node
@@ -67,11 +67,28 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install_root git php-apache
-./bin/install_root composer php-apache
-./bin/install_root symfony-cli php-apache
-./bin/install symfony php-apache
+./bin/install symfony-stack php-apache
 ```
+
+## Custom recipe
+
+- Just rename .recipes/custom.local.dist to custom.local, or create new one
+- Run it with "./bin/install custom.local"
+
+### As root
+
+To use "docker -u root" to run recipes, add at the begining of the script so the /bin/install script can parse it:
+```
+#@AS_ROOT#
+```
+
+## Stack recipe
+
+Stack recipe run on the host instead of "/tmp" directory in docker container.  
+Just put the recipe inside a "stack" directory, or name with "stack" in the recipe name.
+
+- .recipes/node/create/express-app: run with docker exec container_name sh -c "/tmp/.recipes/node/create/express-app"
+- .recipes/php/stack/symfony-stack: run with sh -c ".recipes/php/stack/symfony-stack"
 
 ## Docs
 
