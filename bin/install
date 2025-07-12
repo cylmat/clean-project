@@ -59,7 +59,7 @@ RECIPE=$1
 CONTAINER=$2
 RECIPE_PATH=$(find .recipes -type f -name "${RECIPE}")
 BASEPATH=$(echo "${RECIPE_PATH}" | rev | cut -d/ -f2- | rev)
-AS_ROOT_LABEL="#@AS_ROOT#"
+
 
 function install_user() {
   if [[ -z "${UID}" ]]; then echo "Please run export UID=\$(id -u)"; fi
@@ -82,25 +82,13 @@ function install_recipe() {
   fi
 
   install_user
+
 	docker exec ${CONTAINER} sh -c "mkdir -p /tmp/${BASEPATH}"
 	docker cp --archive ${RECIPE_PATH} ${CONTAINER}:/tmp/${BASEPATH}/${RECIPE}
   ##### docker exec ${CONTAINER} sh -c "chmod a+x -R /tmp/${BASEPATH}"
 
   CMD="/tmp/$CMD" # Runned inside container
-
-  # Parse recipe to check if script run as root or user.
-  AS_ROOT=$(cat "$RECIPE_PATH" | grep -E "^$AS_ROOT_LABEL$" | wc -l)
-  if [[ "$AS_ROOT" == "1" ]]; then 
-    echo
-    echo "Runned as root: "
-    echo "$CMD"
-    docker exec -u root ${CONTAINER} sh -c "$CMD"
-  else
-    echo
-    echo "Runned as user: "
-    echo "$CMD"
-	  docker exec ${CONTAINER} sh -c "$CMD"
-  fi
+	docker exec ${CONTAINER} sh -c "$CMD"
 }
 
 install_recipe

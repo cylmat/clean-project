@@ -75,13 +75,6 @@ export GID=$(id -g)
 - Just rename .recipes/custom.local.dist to custom.local, or create new one
 - Run it with "./bin/install custom.local"
 
-### As root
-
-To use "docker -u root" to run recipes, add at the begining of the script so the /bin/install script can parse it:
-```
-#@AS_ROOT#
-```
-
 ## Stack recipe
 
 Stack recipe run on the host instead of "/tmp" directory in docker container.  
