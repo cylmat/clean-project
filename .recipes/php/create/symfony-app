@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 
-PROJECT=symfony-app
+SYMFONY_APP=symfony-app
 
 for arg in "$@"; do
-    if [[ $arg == --project-name=* ]]; then PROJECT="${arg#--project-name=}"; fi;
+    if [[ $arg == --project-name=* ]]; then SYMFONY_APP="${arg#--project-name=}"; fi;
 done
 
 
@@ -19,11 +19,11 @@ echo "------------------"
 echo
 
 
-echo "Create Symfony project: $PROJECT"
+echo "Create Symfony project: $SYMFONY_APP"
 
 
 # CREATE
-symfony new "$PROJECT"
+symfony new "$SYMFONY_APP"
 
 
 

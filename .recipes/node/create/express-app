@@ -2,19 +2,173 @@
 
 # https://expressjs.com
 # https://expressjs.com/fr/starter/installing.html
+# https://expressjs.com/en/starter/generator.html
+
+
+
+EXPRESS_APP=express-app
+PORT=3001
+
+for arg in "$@"; do
+    if [[ $arg == --project-name=* ]]; then EXPRESS_APP="${arg#--project-name=}"; fi;
+    if [[ $arg == --port=* ]]; then PORT="${arg#--port=}"; fi;
+done
+
+
+
+echo
+echo "---------------"
+echo "INSTALL EXPRESS"
+echo "---------------"
+echo
+
+
+
+cd /var/www
+mkdir $EXPRESS_APP
+cd $EXPRESS_APP
 
 
 npm init -y
-npm install express express mongoose dotenv cors body-parser --save
+echo 'y' | npx express-generator
+
+npm install mongoose dotenv cors body-parser --save
 npm install nodemon --save-dev
 
-cd /var/www
-express express-app
 
-cd express-app
-npm install
+###
+# express → Handles API requests
+# mongoose → Connects to MongoDB
+# dotenv → Loads environment variables
+# cors → Allows frontend to talk to backend
+# body-parser → Parses JSON data
+# nodemon → Restarts server automatically when files change
+###
 
-# DEBUG=express-project:* npm start
+# $ npm run dev
+
+
+echo
+echo "-------------------"
+echo "Creating demo files"
+echo "-------------------"
+echo
+
+
+
+############## .env
+
+cat <<EOF > .env
+MONGO_URI=mongodb://root:root@mongo:27017/expressDB?authSource=admin
+PORT=$PORT
+EOF
+
+
+############## package.json
+
+curl -s https://webinstall.dev/jq | bash
+source ~/.config/envman/PATH.env
+
+jq ".scripts += {\"start\": \"node app.js\", \"dev\": \"nodemon app.js\", \"kill\": \"pkill -f 'express-app|nodemon|node app.js'\"}" package.json > \
+    /tmp/package.json && mv /tmp/package.json package.json
+
+jq '.type = "module"' package.json > /tmp/package.json && mv /tmp/package.json package.json
+
+
+############## app.js
+
+
+if [[ -f app.js ]]; then mv app.js app.js.bak; fi
+
+cat <<EOF > app.js
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import usersRoute from "./routes/users.js";
+
+dotenv.config();
+const app = express();
+const PORT = process.env.PORT || $PORT;
+
+// Middleware
+app.use(cors());
+app.use(express.json()); // need to POST -H "Content-Type: application/json"
+app.use("/api/user", usersRoute);
+
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
+
+// Test Route
+app.get("/", (req, res) => {
+  res.send("API Express is running...");
+});
+
+app.listen(PORT, () => console.log(\`Server running on port ${PORT}\`));
+EOF
+
+
+############## routes/user.js
+
+if [[ -f routes/users.js ]]; then mv routes/users.js routes/users.js.bak; fi
+
+cat <<EOF > routes/users.js
+import express from "express";
+import User from "../models/User.js";
+
+const router = express.Router();
+
+// Get users 
+// curl -X GET http://localhost:$PORT/api/user
+
+// Create user
+// curl -X POST http://localhost:$PORT/api/user -d '{"name":"John Doe","email":"jdoe@me.com","password":"password"}'
+
+// Register User
+router.post("/", async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const newUser = new User({ name, email, password });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get All Users
+router.get("/", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+export default router;
+EOF
+
+
+############## models/User.js
+
+mkdir models
+
+cat <<EOF > models/User.js
+import mongoose from "mongoose";
+
+const userSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  password: String
+}, { timestamps: true });
+
+export default mongoose.model("User", userSchema);
+EOF
+
+
+
+
+
 
 
 ################

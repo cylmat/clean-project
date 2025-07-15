@@ -6,8 +6,9 @@
 
 # APP
 EXPRESS_APP ?= express-app
-MERN_APP ?= mern-app
 SYMFONY_APP ?= symfony-app
+# -
+REACT_APP ?= react-app
 
 # CONTAINER
 NODE_CONTAINER ?= node
@@ -33,19 +34,25 @@ clear-volumes:
 # RUN #
 #######
 
-express:
-	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); DEBUG=$(EXPRESS_APP):* npm start"
+express-start:
+	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); DEBUG=$(EXPRESS_APP):* npm run dev"
 
-mern-back:
-	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/backend; npm run dev"
+express-stop:
+	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); npm run kill"
 
-mern-front:
-	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/frontend; npm start"
-
-mern-fixtures:
+express-fixtures:
 	curl -X POST http://localhost:3000/api/user \
 		-H "Content-Type: application/json" \
 		-d '{"name":"John Doe2","email":"jdoe@me.com","password":"password"}'
+
+# mern-back:
+# 	docker exec $(NODE_CONTAINER) sh -c "cd $(MERN_APP)/backend; npm run dev"
+
+react-start:
+	docker exec $(NODE_CONTAINER) sh -c "cd $(REACT_APP); npm start"
+
+react-stop:
+	docker exec $(NODE_CONTAINER) sh -c "cd $(REACT_APP); npm run kill"
 
 symfony-start:
 	docker exec $(PHP_CONTAINER) sh -c "symfony local:server:start --dir=$(SYMFONY_APP) --listen-ip=0.0.0.0 --port=80 -d"

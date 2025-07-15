@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+# https://create-react-app.dev
+
+
+
+
+REACT_APP=react-app
+PORT=3000
+
+for arg in "$@"; do
+    if [[ $arg == --project-name=* ]]; then REACT_APP="${arg#--project-name=}"; fi;
+    if [[ $arg == --port=* ]]; then PORT="${arg#--port=}"; fi;
+done
+
+
+
+echo
+echo "-------------"
+echo "Install React"
+echo "-------------"
+echo
+
+
+
+echo 'y' | npx create-react-app $REACT_APP
+cd $REACT_APP
+npm install axios react-router-dom
+
+# or
+# npm create vite@latest react-app -- --template react 
+
+
+
+###
+# npm start
+# npm run build
+# npm test
+# npm run eject
+###
+
+# $ npm start
+
+# on npm 7+, extra double-dash -- is needed 
+# $ npm run dev -- --host 0.0.0.0 --port 80
+
+
+############## .env
+
+DEFAULT_BACKEND_PORT=3001
+
+
+cat <<EOF > .env
+BACKEND_URI=http://localhost:$DEFAULT_BACKEND_PORT
+PORT=$PORT
+EOF
+
+
+############## package.json
+
+curl -s https://webinstall.dev/jq | bash
+source ~/.config/envman/PATH.env
+
+jq ".scripts += {\"kill\": \"pkill -f 'react-app|nodemon|node app.js'\"}" package.json > \
+    /tmp/package.json && mv /tmp/package.json package.json
+
+jq '.type = "module"' package.json > /tmp/package.json && mv /tmp/package.json package.json
+
+
+
+############## AppBackend.sample.js
+
+cat <<EOF > src/AppBackend.sample.js
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const BACKEND_URI = process.env.BACKEND_URI || $DEFAULT_BACKEND_PORT;
+
+function AppBackend() {
+  const [message, setMessage] = useState("");
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get(BACKEND_URI + "/")
+      .then((res) => setMessage(res.data))
+      .catch((err) => console.error(err));
+
+     axios.get(BACKEND_URI + "/api/user")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return (
+    <div>
+      <p>{message}</p>
+      <p>List of users:</p>
+      {users.map((user) => (
+        <p key={user._id}>{user.name}: {user.email}</p>
+      ))}
+    </div>
+  );
+}
+
+export default AppBackend;
+EOF
+

@@ -50,9 +50,8 @@ if [[ -z "$UID" || -z "$GID" ]]; then
 fi
 
 for arg in "$@"; do
-  if [[ $arg == --project-name=* ]]; then
-    PROJECT="${arg#--project-name=}"
-  fi
+  if [[ $arg == --project-name=* ]]; then PROJECT="${arg#--project-name=}"; fi
+  if [[ $arg == --port=* ]]; then PORT="${arg#--port=}"; fi
 done
 
 RECIPE=$1
@@ -74,6 +73,7 @@ function install_recipe() {
 
   CMD="${BASEPATH}/${RECIPE} --container-name=${CONTAINER}"
   if [[ ! -z "$PROJECT" ]]; then CMD="$CMD --project-name=$PROJECT"; fi
+  if [[ ! -z "$PORT" ]]; then CMD="$CMD --port=$PORT"; fi
 
   # Check if recipe is a "stack" one, runned on host.
   if [[ "$RECIPE" =~ stack ]]; then
@@ -85,7 +85,6 @@ function install_recipe() {
 
 	docker exec ${CONTAINER} sh -c "mkdir -p /tmp/${BASEPATH}"
 	docker cp --archive ${RECIPE_PATH} ${CONTAINER}:/tmp/${BASEPATH}/${RECIPE}
-  ##### docker exec ${CONTAINER} sh -c "chmod a+x -R /tmp/${BASEPATH}"
 
   CMD="/tmp/$CMD" # Runned inside container
 	docker exec ${CONTAINER} sh -c "$CMD"
