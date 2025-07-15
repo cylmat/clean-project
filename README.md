@@ -38,14 +38,15 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install mern-stack node
+./bin/install express-app node
+./bin/install react-app node
 ```
 
 * Run container's server for node
 ```shell
-make mern-backend
-make mern-frontend
-make mern-fixtures
+make express-fixtures
+make express-start
+make react-app
 ```
 
 ### Symfony + React
@@ -69,7 +70,7 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install symfony-app php
+./bin/install symfony php
 ```
 
 ## Custom recipe
