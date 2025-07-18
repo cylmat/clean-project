@@ -15,7 +15,7 @@ services:
             - ${MYSQL_PORTS:-3306:3306}
         volumes:
             #- ../config/mysql/my.cnf:/etc/mysql/my.cnf:ro
-            - ../fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+            # - ../../fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
             - mysql-v:/var/lib/mysql
         ##########
         # IMPORT : mysql database < script.sql
