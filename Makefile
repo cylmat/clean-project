@@ -52,7 +52,7 @@ react-stop:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(REACT_APP); npm run kill" || true
 
 symfony-start:
-	docker exec $(PHP_CONTAINER) sh -c "symfony local:server:start --dir=$(SYMFONY_APP) --listen-ip=0.0.0.0 --port=80 -d"
+	docker exec $(PHP_CONTAINER) sh -c "symfony local:server:start --dir=$(SYMFONY_APP) --listen-ip=0.0.0.0 --port=80"
 
 symfony-stop:
 	docker exec $(PHP_CONTAINER) sh -c "symfony local:server:stop --dir=$(SYMFONY_APP)"

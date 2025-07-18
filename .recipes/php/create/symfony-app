@@ -2,9 +2,11 @@
 
 
 SYMFONY_APP=symfony-app
+PORT=80
 
 for arg in "$@"; do
     if [[ $arg == --project-name=* ]]; then SYMFONY_APP="${arg#--project-name=}"; fi;
+    if [[ $arg == --port=* ]]; then PORT="${arg#--port=}"; fi;
 done
 
 
@@ -13,27 +15,111 @@ git config --global user.name "Your Name"
 
 
 echo
-echo "------------------"
-echo "Create Symfony App"
-echo "------------------"
+echo "-------------------"
+echo "Install Symfony App"
+echo "-------------------"
 echo
 
 
-echo "Create Symfony project: $SYMFONY_APP"
 
 
 # CREATE
-symfony new "$SYMFONY_APP"
+symfony new $SYMFONY_APP
+cd $SYMFONY_APP
+
+composer require symfony/maker-bundle symfony/profiler-pack --dev
+
+# Allow frontend to talk to backend
+composer require nelmio/cors-bundle
 
 
+echo
+echo "-----------------"
+echo "Create demo files"
+echo "-----------------"
+echo
+
+
+
+
+############## src/Controller/UserController.php
+
+if [ ! -d src/Controller ]; then mkdir src/Controller; fi
+
+cat <<EOF > src/Controller/UserController.php
+<?php
+
+namespace App\Controller;
+
+use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Attribute\Route;
+
+final class UserController extends AbstractController
+{
+    #[Route('/', name: 'app_user', methods: ['GET'])]
+    public function index(): JsonResponse
+    {
+        return new JsonResponse("Api Symfony running");
+    }
+
+    #[Route('/api/user', name: 'app_user_list', methods: ['GET', 'POST'])]
+    public function list(Request \$request): JsonResponse
+    {
+        if (\$request->isMethod('POST')) {
+            return new JsonResponse('POST');
+        }
+
+        \$user = new User();
+        \$user->name = 'John Doe';
+        \$user->email = 'john@example.com';
+        \$user->phone = '1234567890';
+
+        return new JsonResponse([\$user->toArray()]);
+    }
+}
+EOF
+
+
+
+############## src/Entity/User.php
+
+if [ ! -d src/Entity ]; then mkdir src/Entity; fi
+
+cat <<EOF > src/Entity/User.php
+<?php
+
+namespace App\Entity;
+
+class User
+{
+    public string \$name;
+    public string \$email;
+    public string \$phone;
+
+    public function toArray(): array
+    {
+        return [
+            'name' => \$this->name,
+            'email' => \$this->email,
+            'phone' => \$this->phone
+        ];
+    }
+}
+EOF
+
+
+##########
 
 # echo "Use this in case of Apache Http server:"
 # echo "curl https://raw.githubusercontent.com/cylmat/symplay/refs/heads/main/public/.htaccess -o symfony-app/public/.htaccess"
 
 
 # INFO
+# $ symfony local:server:start --dir=symfony-app --listen-ip=0.0.0.0 --port=80 -d
 
-# export PORT=80
-# symfony local:server:start --dir=symfony-app --listen-ip=0.0.0.0 --port=\$PORT -d
 
-# Access test page on http://0.0.0.0:\$PORT/test
+echo
+echo "Symfony App installed [OK]"

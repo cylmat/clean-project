@@ -3,9 +3,6 @@ services:
     php:
         build: 
             dockerfile: ./php.Dockerfile
-            args:
-                - UID=${UID:-1000}
-                - GID=${GID:-1000}
         container_name: php
         command: sleep infinity
         ports: 

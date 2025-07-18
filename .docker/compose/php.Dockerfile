@@ -2,9 +2,6 @@ ARG IMAGE=php
 
 FROM ${IMAGE}
 
-ARG UID=1000
-ARG GID=1000
-
 
 
 RUN apt update
@@ -16,12 +13,11 @@ RUN apt install -y \
 
 RUN apt install -y \
     curl \
+    procps \
     wget \
     vim \
     zip
 
-
-USER root
 
 ###############
 # Install git #
@@ -54,6 +50,7 @@ RUN chmod a+x /usr/local/bin/composer
 
 RUN composer --version
 
+
 #######################
 # Install symfony-cli #
 #######################
@@ -66,18 +63,6 @@ RUN mv $HOME/.symfony5/bin/symfony /usr/local/bin/symfony
 RUN chmod a+x /usr/local/bin/symfony
 
 RUN symfony -V
-
-
-
-# USER init #
-
-# debian-like
-RUN addgroup user --gid "${GID}" && adduser user --uid "${UID}" --gid "${GID}" --gecos GECOS --disabled-password
-
-# linux-like
-# RUN groupadd --gid "${GID}" user && useradd --uid "${UID}" --gid "${GID}" --create-home --shell /bin/bash user
-
-USER user
 
 
 WORKDIR /var/www

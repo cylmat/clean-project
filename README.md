@@ -42,7 +42,11 @@ export GID=$(id -g)
 ./bin/install react-app node
 ```
 
-* Run container's server for node
+- Add "import AppBackend from './AppBackend'" in react's App.js
+- Add <AppBackend /> in react's App.js
+- Change .env backend's port in react-app
+
+* Run container's servers
 ```shell
 make express-fixtures
 make express-start
@@ -70,7 +74,28 @@ make up
 ```shell
 export UID=$(id -u)
 export GID=$(id -g)
-./bin/install symfony php
+./bin/install symfony-app php
+./bin/install react-app node
+```
+
+- Change .env backend's port in react-app
+
+* Run container's servers
+```shell
+make symfony-start
+make react-start
+```
+
+## Use fixtures demo backend api
+
+```
+export BACKEND_API_PORT=80
+
+# Get users 
+curl -X GET http://localhost:$BACKEND_API_PORT/api/user
+
+# Create user
+curl -X POST http://localhost:$BACKEND_API_PORT/api/user -d '{"name":"John Doe","email":"jdoe@me.com","password":"password"}'
 ```
 
 ## Custom recipe

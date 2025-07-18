@@ -51,8 +51,8 @@ DEFAULT_BACKEND_PORT=3001
 
 
 cat <<EOF > .env
-PORT=$PORT
-BACKEND_URI=http://localhost:$DEFAULT_BACKEND_PORT
+REACT_APP_PORT=$PORT
+REACT_APP_BACKEND_URI=http://localhost:$DEFAULT_BACKEND_PORT
 EOF
 
 
@@ -65,13 +65,13 @@ jq ".scripts += {\"kill\": \"pkill -f 'react-app|nodemon|node app.js'\"}" packag
     /tmp/package.json && mv /tmp/package.json package.json
 
 
-############## AppBackend.sample.js
+############## AppBackend.js
 
-cat <<EOF > src/AppBackend.sample.js
+cat <<EOF > src/AppBackend.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const BACKEND_URI = process.env.BACKEND_URI || "http://localhost:$DEFAULT_BACKEND_PORT"
+const BACKEND_URI = process.env.REACT_APP_BACKEND_URI || "http://localhost:$DEFAULT_BACKEND_PORT"
 
 function AppBackend() {
   const [message, setMessage] = useState("");
@@ -88,21 +88,29 @@ function AppBackend() {
   }, []);
 
   return (
-    <div>
-      <p>{message}</p>
-      return (
-    <div>
-      <p>{message}</p>
-      {users.length > 0 && <div>
-        <p>List of users:</p>
-          {users.map((user) => (
-            <p key={user._id}>{user.name}: {user.email}</p>
-          ))}
-        </div>
-      }
+    <div style={{ border: "1px solid black" }}>
+      {message ? <p>{message}</p> : <p>Api not running...</p>}
+      <div>
+        {users.length > 0 
+          ? <div>
+            <p>List of users:</p>
+              {users.map((user) => (
+                <p key={user._id}>{user.name}: {user.email}</p>
+              ))}
+            </div>
+          : <p>Loading...</p>
+        }
+      </div>
     </div>
   )
 }
 
 export default AppBackend
 EOF
+
+
+
+##########
+
+echo
+echo "React App installed [OK]"

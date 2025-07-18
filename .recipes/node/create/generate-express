@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# https://create-project.js.org
+
+
+echo "npx express-generator"
+
+
+
+###
+# from express-generator
+#
+# $ PORT=3001 DEBUG=app:* npm start
+###
