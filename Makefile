@@ -40,10 +40,8 @@ express-start:
 express-stop:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(EXPRESS_APP); npm run kill" || true
 
-express-fixtures:
-	curl -X POST http://localhost:3000/api/user \
-		-H "Content-Type: application/json" \
-		-d '{"name":"John Doe2","email":"jdoe@me.com","password":"password"}'
+node-kill:
+	docker exec $(NODE_CONTAINER) sh -c "pkill -f 'node'" || true
 
 react-start:
 	docker exec $(NODE_CONTAINER) sh -c "cd $(REACT_APP); npm start"
