@@ -48,9 +48,8 @@ export GID=$(id -g)
 
 * Run container's servers
 ```shell
-make express-fixtures
 make express-start
-make react-app
+make react-start
 ```
 
 ### Symfony + React
