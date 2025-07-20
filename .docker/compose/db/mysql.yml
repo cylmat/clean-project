@@ -15,7 +15,7 @@ services:
             - ${MYSQL_PORTS:-3306:3306}
         volumes:
             #- ../config/mysql/my.cnf:/etc/mysql/my.cnf:ro
-            # - ../../fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+            - ../../fixtures/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
             - mysql-v:/var/lib/mysql
         ##########
         # IMPORT : mysql database < script.sql
@@ -27,7 +27,7 @@ services:
         environment: 
             - PMA_ARBITRARY=1
         ports: 
-            - ${PHPMYADMIN_PORTS:-8080:80}
+            - ${PHPMYADMIN_PORTS:-8083:80}
         depends_on:
             - mysql
 

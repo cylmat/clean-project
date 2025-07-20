@@ -14,6 +14,9 @@ REACT_APP ?= react-app
 NODE_CONTAINER ?= node
 PHP_CONTAINER ?= php
 
+# DB
+MYSQL_CONTAINER ?= mysql
+
 ##########
 # DOCKER #
 ##########
@@ -29,6 +32,15 @@ restart:
 
 clear-volumes:
 	docker volume rm $(shell docker volume ls -qf dangling=true)
+
+############
+# FIXTURES #
+# Dev only #
+# Reload manually
+############
+
+mysql-fixtures:
+	docker exec $(MYSQL_CONTAINER) sh -c "mysql -u user -ppass mydb < /docker-entrypoint-initdb.d/mysql.sql"
 
 #######
 # RUN #

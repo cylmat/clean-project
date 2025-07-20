@@ -85,7 +85,22 @@ make symfony-start
 make react-start
 ```
 
-## Use fixtures demo backend api
+## Databases
+
+### Mysql
+
+PhpMyAdmin
+- Url: http://localhost:8083
+- Server: mysql
+- User/pass: root/root or user/pass
+
+```shell
+mysql -u user -ppass -h localhost mydb
+```
+
+## Recipes
+
+### Use fixtures demo backend api
 
 ```
 export BACKEND_API_PORT=80
@@ -97,12 +112,12 @@ curl -X GET http://localhost:$BACKEND_API_PORT/api/user
 curl -X POST http://localhost:$BACKEND_API_PORT/api/user -d '{"name":"John Doe","email":"jdoe@me.com","password":"password"}'
 ```
 
-## Custom recipe
+### Custom recipe
 
 - Just rename .recipes/custom.local.dist to custom.local, or create new one
 - Run it with "./bin/install custom.local"
 
-## Stack recipe
+### Stack recipe
 
 Stack recipe run on the host instead of "/tmp" directory in docker container.  
 Just put the recipe inside a "stack" directory, or name with "stack" in the recipe name.
